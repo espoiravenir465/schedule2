@@ -1,0 +1,51 @@
+.button {
+  border: 1px solid $grey-3;
+  border-radius: .25rem;
+  color: $grey-2;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  outline: none;
+  padding: .5rem .75rem;
+  text-decoration: none;
+  transition:border-color 300ms ease-in-out,
+    color 300ms ease-in-out;
+    
+  &:hover {
+    border-color: $grey-1;
+    color: inherit;
+   }
+
+.icon {
+   margin-right: .5em;
+  }
+
+&--link {
+  background-color: #FFECCC; 
+  border: 0;
+  box-shadow: 2px 2px 3px 1px #666;
+    -moz-box-shadow: 2px 2px 3px 1px #666;
+    -webkit-box-shadow: 2px 2px 3px 1px #666;
+  margin-left: 1rem;
+  }
+
+&--inverse {
+    background: #3365FF;
+    color: #fff;
+    transition: opacity 300ms ease-in-out;
+
+&:hover {
+    background: #668BFF;
+    color: #fff;
+    opacity: .8;
+ } 
+}
+
+&--fluid {
+   width: 100%;
+}
+
+
+}
