@@ -1,0 +1,110 @@
+【設計書】
+
+<機能設計>
+・しおりを登録できる
+・しおりを編集できる
+・しおりを削除できる
+・イベントを登録できる
+・イベントを編集できる
+・イベントを削除できる
+・写真を登録できる
+・自分の写真を削除できる
+・コメントを登録できる
+・自分のコメントを編集できる
+・自分のコメントを削除できる
+・ユーザ認証できる
+・友達を招待できる
+・友達は自分のコメントを登録できる
+・友達は自分のコメントを編集できる
+・友達は自分のコメントを削除できる
+・友達は自分の写真を登録できる
+・友達は自分の写真を削除できる
+
+＜テーブル設計＞
+●ユーザーテーブル（Laravelのデフォルト使用）
+
+ユーザID     id  / SERIAL
+ユーザ名    name / VARACHAR(255)
+メール      email / VARCHAR(255)
+パスワード  passward /VARCHAR(255)
+            email_verified at / TIMESTAMP
+            rememberToken     /   VARCHAR(100)
+            created at        / TIMESTAMP
+            updated at       / TIMESTAMP
+
+●Schedulesテーブル
+
+しおりID          id  / SERIAL
+しおりタイトル   title / VARCHAR(50)
+出発日           go_date  / DATE
+帰着日           return_date  / DATE
+ユーザーID       user_id  / INTEGER
+招待ユーザID1    invite_user_id_1 /
+招待ユーザID2    invite_user_id_2 /
+招待ユーザID3    invite_user_id_3 /
+登録日時         created_at / TIMESTAMP
+
+
+
+●eventsテーブル
+
+イベントID        id  / SERIAL
+しおりID          schedule_id  / INTEGER
+イベントタイトル  event_title  / VARCHAR(50)
+イベント日        event_date  / DATE
+イベント開始時間  event_start / TIME
+イベント終了時間  event_end  / TIME
+登録日時          created_at / TIMESTAMP
+
+●Photosテーブル
+
+写真ID              photo_id / SERIAL
+ファイル名          filename  / VARCHAR(255)
+ユーザID            user_id  / INTEGER
+イベントID          event_id / INTEGER
+登録日時            created_at / TIMESTAMP
+
+●Commentsテーブル
+
+コメントID         comment_id  / SERIAL
+イベントID         event_id  /  INTEGER
+コメント           comment / TEXT
+登録日時           created_at / TIMESTAMP
+
+<URL設計>
+
+●API
+api/register                    POST     会員登録
+api/login                       POST     ログイン
+api/logout                      POST     ログアウト
+api/user                        GET      認証ユーザ取得
+api/{user_id}/schedules                  GET      スケジュール一覧
+api/{user_id}/schedules                  POST     スケジュール作成
+api/{user_id}/schedules                  PATCH    スケジュール編集
+api/{user_id}/schedules                  DELETE   スケージュール削除
+api/{user_id}/{schedule_id}/events       GET      イベント一覧
+api/{user_id}/{schedule_id}/events       POST     イベント登録
+api/{user_id}/{schedule_id}/{event_id}   GET      イベント詳細
+api/{user_id}/{schedule_id}/{event_id}   PATCH    イベント編集
+api/{user_id}/{schedule_id}/{event_id}   DELETE   イベント削除
+api/{user_id}/{schedule_id}/{event_id}/photos         GET  写真表示
+api/{user_id}/{schedule_id}/{event_id}/photos         POST  写真投稿
+api/{user_id}/{schedule_id}/{event_id}/{photo_id}     GET  写真詳細
+api/{user_id}/{schedule_id}/{event_id}/{photo_id}     DELETE  写真削除
+api/{user_id}/{schedule_id}/{event_id}/comments       GET  コメント表示
+api/{user_id}/{schedule_id}/{event_id}/comments       POST  コメント投稿
+api/{user_id}/{schedule_id}/{event_id}/{comment_id}   PATCH  コメント編集
+api/{user_id}/{schedule_id}/{event_id}/{comment_id}   DELETE  コメント削除
+
+●API以外
+/        GET      TOP画面表示
+{schedules_id}/{event_id}/photos/{photo_id}/download  GET  写真ダウンロード
+
+●画面設計
+/             TOP画面
+/login        ログイン/新規登録画面
+/{user_id}/schedules   スケジュール一覧・作成・編集・削除
+/{user_id}/{schedule_id}/events  イベント一覧・イベント登録
+/{user_id}/{schedule_id}/{event_id}  イベント詳細・編集・削除/写真投稿・削除
+　　　　　　　　　　　　　　　　　　 コメント投稿・編集・削除
+
