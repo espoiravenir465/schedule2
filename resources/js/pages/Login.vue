@@ -93,8 +93,8 @@ export default {
     await this.$store.dispatch('auth/login', this.loginForm)
     
     if (this.apiStatus) {
-    // トップページに移動する
-    this.$router.push('/')
+    // スケジュールに移動する
+    this.$router.push('/schedule')
      }
     },
     async register () {
@@ -102,8 +102,8 @@ export default {
     await this.$store.dispatch('auth/register', this.registerForm)
     
      if (this.apiStatus) {
-    // トップページに移動する
-    this.$router.push('/')
+    // スケジュールに移動する
+    this.$router.push('/schedule')
     }
   },
   clearError () {

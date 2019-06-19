@@ -1,5 +1,6 @@
 import './bootstrap'
 import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
 // ルーティングの定義をインポートする
 import router from './router'
 import store from './store' 
@@ -7,10 +8,15 @@ import store from './store'
 import App from './App.vue'
 import BodyClass from 'vue-body-class'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
 const createApp = async () => {
   await store.dispatch('auth/currentUser')
 
 Vue.use(BodyClass, router)
+Vue.use(BootstrapVue)
 
 new Vue({
   el: '#app',

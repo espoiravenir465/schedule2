@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Top from './pages/Top.vue'
 import Login from './pages/Login.vue'
 import SystemError from './pages/errors/System.vue'
+import Schedule from './pages/Schedule.vue'
 
 import store from './store'
 
@@ -30,6 +31,11 @@ const routes = [
         next()
       }
     }
+  },
+  {
+    path: '/schedule',
+    meta: { bodyClass: 'page-schedule' },
+    component: Schedule
   },
   {
     path: '/500',

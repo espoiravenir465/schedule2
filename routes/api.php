@@ -26,3 +26,7 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/user', function () {
     return Auth::user();
 })->name('user');
+//スケジュール一覧
+Route::get('/schedules', 'ScheduleController@index')->name('schedules.index');
+//スケジュール新規作成
+Route::post('/schedules', 'ScheduleController@create')->name('schedules.create');
