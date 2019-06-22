@@ -21,16 +21,9 @@ class ScheduleController extends Controller
         $this->middleware('auth');
     }
 
- public function index()
-    {
-    $schedules = Schedule::with(['owner'])
-    ->orderBy(Schedule::CREATED_AT, 'desc')->paginate();
-
-     return $schedules;
-    }
 
   
- public function createSchedule(StoreSchedule $request)
+ public function create(StoreSchedule $request)
   {
         $schedule = new Schedule();
         $schedule->title = $request->get('title');

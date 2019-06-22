@@ -27,6 +27,6 @@ Route::get('/user', function () {
     return Auth::user();
 })->name('user');
 //スケジュール一覧
-Route::get('/schedules', 'ScheduleController@index')->name('schedules.index');
+Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
 //スケジュール新規作成
-Route::post('/schedules', 'ScheduleController@create')->name('schedules.create');
+Route::post('/schedule', 'ScheduleController@create')->name('schedule.create');

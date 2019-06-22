@@ -80,10 +80,10 @@ api/register                   POST     会員登録
 api/login                      POST     ログイン
 api/logout                     POST     ログアウト
 api/user                       GET      認証ユーザ取得
-api/schedules                  GET      スケジュール一覧
-api/schedules                  POST     スケジュール作成
-api/schedules                  PATCH    スケジュール編集
-api/schedules                  DELETE   スケージュール削除
+api/schedule                  GET      スケジュール一覧
+api/schedule                  POST     スケジュール作成
+api/schedule/{schedule_id}    PATCH    スケジュール編集
+api/schedule /{schedule_id}   DELETE   スケージュール削除
 api/{schedule_id}/events       GET      イベント一覧
 api/{schedule_id}/events       POST     イベント登録
 api/{schedule_id}/{event_id}   GET      イベント詳細
@@ -100,13 +100,13 @@ api/{schedule_id}/{event_id}/{comment_id}   DELETE  コメント削除
 
 ●API以外
 /        GET      TOP画面表示
-{schedules_id}/{event_id}/photos/{photo_id}/download  GET  写真ダウンロード
+{schedule_id}/{event_id}/photos/{photo_id}/download  GET  写真ダウンロード
 
 ●画面設計
 /             TOP画面
 /login        ログイン/新規登録画面
-/{user_id}/schedules   スケジュール一覧・作成・編集・削除
-/{user_id}/{schedule_id}/events  イベント一覧・イベント登録
-/{user_id}/{schedule_id}/{event_id}  イベント詳細・編集・削除/写真投稿・削除
+/schedule   スケジュール一覧・作成・編集・削除
+/{schedule_id}/events  イベント一覧・イベント登録
+/{schedule_id}/{event_id}  イベント詳細・編集・削除/写真投稿・削除
 　　　　　　　　　　　　　　　　　　 コメント投稿・編集・削除
 
