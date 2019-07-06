@@ -1885,6 +1885,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1919,6 +1920,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1940,17 +1942,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 formData = new FormData();
-                formData.append('title', this.title), ('go_date', this.go_date), ('return_date', this.return_date);
-                _context.next = 4;
+                formData.append('title', this.schedule.title);
+                formData.append('go_date', this.schedule.go_date);
+                formData.append('return_date', this.schedule.return_date);
+                _context.next = 6;
                 return axios.post('/api/schedule', formData);
 
-              case 4:
+              case 6:
                 response = _context.sent;
-                //this.reset()
-                // this.$emit('input', false)
                 this.$router.push('/schedule');
 
-              case 6:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -2165,8 +2167,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_ScheduleForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/ScheduleForm.vue */ "./resources/js/components/ScheduleForm.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ScheduleForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/ScheduleForm.vue */ "./resources/js/components/ScheduleForm.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2191,21 +2202,115 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ScheduleForm: _components_ScheduleForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ScheduleForm: _components_ScheduleForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
-      schedule: {
-        title: "",
-        go_date: "",
-        return_date: ""
-      }
+      schedules: []
     };
+  },
+  methods: {
+    fetchSchedules: function () {
+      var _fetchSchedules = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/schedule');
+
+              case 2:
+                response = _context.sent;
+                this.schedules = response.data.data;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchSchedules() {
+        return _fetchSchedules.apply(this, arguments);
+      }
+
+      return fetchSchedules;
+    }(),
+    deleteSchedule: function () {
+      var _deleteSchedule = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(schedule_id) {
+        var _this = this;
+
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post('/api/schedule/{schedule_id}').then(function (res) {
+                  _this.schedules = response.data.data;
+                });
+
+              case 2:
+                response = _context2.sent;
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function deleteSchedule(_x) {
+        return _deleteSchedule.apply(this, arguments);
+      }
+
+      return deleteSchedule;
+    }()
+  },
+  watch: {
+    $route: {
+      handler: function () {
+        var _handler = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.next = 2;
+                  return this.fetchSchedules();
+
+                case 2:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3, this);
+        }));
+
+        function handler() {
+          return _handler.apply(this, arguments);
+        }
+
+        return handler;
+      }(),
+      immediate: true
+    }
   }
 });
 
@@ -36311,22 +36416,43 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container", attrs: { id: "events" } },
+    { staticClass: "container", attrs: { id: "schedules" } },
     [
       _c("ScheduleForm"),
       _vm._v(" "),
       _c("table", { staticClass: "table table-bordered" }, [
         _vm._m(0),
         _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("td", [_vm._v(_vm._s(_vm.schedule.title))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.schedule.go_date))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.schedule.return_date))])
-          ])
-        ])
+        _c(
+          "tbody",
+          _vm._l(_vm.schedules, function(schedule) {
+            return _c("tr", [
+              _c("td", [_vm._v(_vm._s(schedule.title))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(schedule.go_date))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(schedule.return_date))]),
+              _vm._v(" "),
+              _vm._m(1, true),
+              _vm._v(" "),
+              _c("td", { attrs: { align: "center", valign: "middle" } }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteSchedule(schedule.id)
+                      }
+                    }
+                  },
+                  [_vm._v("削除")]
+                )
+              ])
+            ])
+          }),
+          0
+        )
       ])
     ],
     1
@@ -36345,8 +36471,18 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("帰着日")]),
         _vm._v(" "),
-        _c("th", [_vm._v("変更")])
+        _c("th", [_vm._v("変更")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("削除")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { align: "center", valign: "middle" } }, [
+      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("編集")])
     ])
   }
 ]

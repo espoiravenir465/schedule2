@@ -27,8 +27,11 @@
 </template>
 
 <script>
-    export default {
-        data(){
+import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
+
+  export default {
+     
+      data(){
       return {
         schedule:{title:"",go_date:"",return_date:""},
       }
@@ -36,12 +39,16 @@
       methods:{
             async createSchedule () {
             const formData = new FormData()
-            formData.append('title', this.title),('go_date',this.go_date),('return_date',this.return_date)
+            formData.append('title', this.schedule.title)
+            formData.append('go_date',this.schedule.go_date)
+            formData.append('return_date',this.schedule.return_date)
+
             const response = await axios.post('/api/schedule', formData)
+            
+            this.$router.push('/schedule')
 
            
            
-           this.$router.push('/schedule')
          }
         }
     }

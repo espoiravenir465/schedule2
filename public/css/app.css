@@ -11064,3 +11064,8 @@ html {
   background: rgba(255, 255, 255, 0.6);
 }
 
+.thead-dark th {
+  text-align: center;
+  vertical-align: middle;
+}
+

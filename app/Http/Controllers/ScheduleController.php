@@ -23,8 +23,9 @@ class ScheduleController extends Controller
 
 
   
- public function create(StoreSchedule $request)
-  {
+ public function createSchedule(StoreSchedule $request)
+  {     
+        \Log::info($request);
         $schedule = new Schedule();
         $schedule->title = $request->get('title');
         $schedule->go_date=$request->get('go_date');
@@ -33,11 +34,26 @@ class ScheduleController extends Controller
  
         Auth::user()->schedules()->save($schedule);
         
-        $new_schedule = Schedule::where('id', $schedule->id)->with('author')->first();
+        $new_schedule = Schedule::where('id', $schedule->id)->with('owner')->first();
 
 
         return response($schedule, 201);
 
     }
+    
+    public function index()
+{
+    $schedules = Schedule::with(['owner'])
+        ->orderBy(Schedule::CREATED_AT, 'desc')->paginate();
+
+    return $schedules;
+}
+
+   public function deleteSchedule(Request $request){  
+    $schedule = Schedule::where('id', $request->id)->delete();
+
+    $schedules = Schedule::all();
+    return $todos;
+  }
 
 }   

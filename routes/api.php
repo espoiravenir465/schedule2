@@ -29,4 +29,6 @@ Route::get('/user', function () {
 //スケジュール一覧
 Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
 //スケジュール新規作成
-Route::post('/schedule', 'ScheduleController@create')->name('schedule.create');
+Route::post('/schedule', 'ScheduleController@createSchedule')->name('schedule.create');
+//スケジュール削除
+Route::delete('schedule/{schedule_id}', 'ScheduleController@deleteSchedule')->name('schedule.delete');

@@ -1,21 +1,23 @@
 <template>
-  <div class="container" id="events">
+  <div class="container" id="schedules">
   <ScheduleForm  />
-  
-<table class="table table-bordered">
+ <table class="table table-bordered">
 	<thead  class="thead-dark">
 		<tr>
 			<th>スケジュール名</th>
 			<th>出発日</th>
 			<th>帰着日</th>
 			<th>変更</th>
+			<th>削除</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
+		<tr v-for="schedule in schedules">
 			<td>{{schedule.title}}</td>
 			<td>{{schedule.go_date}}</td>
 			<td>{{schedule.return_date}}</td>
+			<td align = "center" valign ="middle" ><button class="btn btn-primary">編集</button></td>
+			<td align = "center" valign ="middle" ><button class="btn btn-danger"v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
 		</tr>
 	</tbody>
 </table>
@@ -26,6 +28,7 @@
 import ScheduleForm from '../components/ScheduleForm.vue'
 import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
+import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
 
 
   export default {
@@ -33,12 +36,34 @@ import { mapGetters } from 'vuex'
      ScheduleForm
     },
 
-    data(){
-      return {
-        schedule:{title:"",go_date:"",return_date:""},
-      }
+    data () {
+    return {
+      schedules: []
+    }
       },
+	methods:{
+		async fetchSchedules (){
+    	const response = await axios.get('/api/schedule')
+    	
+    	this.schedules = response.data.data
+		},
+		
+   async deleteSchedule(schedule_id){ 
+      const response = await axios.post('/api/schedule/{schedule_id}').then((res)=>{
+        this.schedules = response.data.data
+      
+      })}
+  },
 
+	
+	watch: {
+    $route: {
+      async handler () {
+        await this.fetchSchedules()
+      },
+      immediate: true
+    }
+  }
     
 }
 
