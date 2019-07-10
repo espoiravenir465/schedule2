@@ -17,7 +17,7 @@
     <div class="form-group">
      <span>帰着日</span> <input type="date" class="form-control" placeholder="Date" v-model="schedule.return_date">
     </div>
-    <button class="btn btn-primary" v-on:click="createSchedule">追加</button>
+    <button class="btn btn-primary">追加</button>
     </form>
   </div>
  </div>
@@ -37,20 +37,18 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       }
       },
       methods:{
+            reload() {
+            this.$router.go({path: this.$router.currentRoute.path, force: true});
+        },
             async createSchedule () {
             const formData = new FormData()
             formData.append('title', this.schedule.title)
             formData.append('go_date',this.schedule.go_date)
             formData.append('return_date',this.schedule.return_date)
-
             const response = await axios.post('/api/schedule', formData)
-            
             this.$router.push('/schedule')
-
-           
-           
+            this.reload();
          }
         }
     }
-    
 </script>

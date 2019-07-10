@@ -12,12 +12,12 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr v-for="schedule in schedules">
+		<tr v-for="(schedule,index) in schedules">
 			<td>{{schedule.title}}</td>
 			<td>{{schedule.go_date}}</td>
 			<td>{{schedule.return_date}}</td>
 			<td align = "center" valign ="middle" ><button class="btn btn-primary">編集</button></td>
-			<td align = "center" valign ="middle" ><button class="btn btn-danger"v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
+			<td align = "center" valign ="middle" ><button class="btn btn-danger"v-on:click="deleteSchedule(index)" >削除</button></td>
 		</tr>
 	</tbody>
 </table>
@@ -48,11 +48,15 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
     	this.schedules = response.data.data
 		},
 		
-   async deleteSchedule(schedule_id){ 
-      const response = await axios.post('/api/schedule/{schedule_id}').then((res)=>{
-        this.schedules = response.data.data
-      
-      })}
+		//reload() {
+    //        this.$router.go({path: this.$router.currentRoute.path, force: true});
+    //    },
+		
+   async deleteSchedule(index){
+      const response = await axios.delete('/api/schedule/{schedule_id}')
+      this.schedules.splice(index, 1)
+    //  this.reload();
+   }
   },
 
 	

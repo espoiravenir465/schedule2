@@ -1932,6 +1932,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    reload: function reload() {
+      this.$router.go({
+        path: this.$router.currentRoute.path,
+        force: true
+      });
+    },
     createSchedule: function () {
       var _createSchedule = _asyncToGenerator(
       /*#__PURE__*/
@@ -1951,8 +1957,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 response = _context.sent;
                 this.$router.push('/schedule');
+                this.reload();
 
-              case 8:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -2248,31 +2255,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchSchedules;
     }(),
+    reload: function reload() {
+      this.$router.go({
+        path: this.$router.currentRoute.path,
+        force: true
+      });
+    },
     deleteSchedule: function () {
       var _deleteSchedule = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(schedule_id) {
-        var _this = this;
-
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(index) {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.post('/api/schedule/{schedule_id}').then(function (res) {
-                  _this.schedules = response.data.data;
-                });
+                return axios["delete"]('/api/schedule/{schedule_id}');
 
               case 2:
                 response = _context2.sent;
+                this.schedules.splice(index, 1); //this.reload();
 
-              case 3:
+              case 4:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, this);
       }));
 
       function deleteSchedule(_x) {
@@ -36015,14 +36025,7 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  on: { click: _vm.createSchedule }
-                },
-                [_vm._v("追加")]
-              )
+              _c("button", { staticClass: "btn btn-primary" }, [_vm._v("追加")])
             ]
           )
         ])
@@ -36425,7 +36428,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.schedules, function(schedule) {
+          _vm._l(_vm.schedules, function(schedule, index) {
             return _c("tr", [
               _c("td", [_vm._v(_vm._s(schedule.title))]),
               _vm._v(" "),
@@ -36442,7 +36445,7 @@ var render = function() {
                     staticClass: "btn btn-danger",
                     on: {
                       click: function($event) {
-                        return _vm.deleteSchedule(schedule.id)
+                        return _vm.deleteSchedule(index)
                       }
                     }
                   },
