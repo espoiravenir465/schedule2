@@ -17,7 +17,7 @@
 			<td>{{schedule.go_date}}</td>
 			<td>{{schedule.return_date}}</td>
 			<td align = "center" valign ="middle" ><button class="btn btn-primary">編集</button></td>
-			<td align = "center" valign ="middle" ><button class="btn btn-danger"v-on:click="deleteSchedule(index)" >削除</button></td>
+			<td align = "center" valign ="middle" ><button class="btn btn-danger" v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
 		</tr>
 	</tbody>
 </table>
@@ -38,7 +38,8 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
 
     data () {
     return {
-      schedules: []
+      schedules: [],
+      schedule_id: 0
     }
       },
 	methods:{
@@ -52,8 +53,11 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
     //        this.$router.go({path: this.$router.currentRoute.path, force: true});
     //    },
 		
-   async deleteSchedule(index){
-      const response = await axios.delete('/api/schedule/{schedule_id}')
+   async deleteSchedule(schedule_id){
+     console.log("test start")
+     console.log(schedule_id)
+     console.log("end")
+      const response = await axios.delete('/api/schedule/'+ schedule_id)
       this.schedules.splice(index, 1)
     //  this.reload();
    }

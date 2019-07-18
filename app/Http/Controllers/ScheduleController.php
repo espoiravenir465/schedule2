@@ -50,6 +50,7 @@ class ScheduleController extends Controller
 }
 
    public function deleteSchedule(Request $request){  
+    \Log::info($request);
     $schedule = Schedule::where('id', $request->id)->delete();
     $schedules = Schedule::all();
     return $schedules;
