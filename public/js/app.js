@@ -2221,32 +2221,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      schedules: []
+      schedules: [],
+      schedule_id: 0
     };
   },
+  deleteSchedule: function () {
+    var _deleteSchedule = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+      var index;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              index = _ref.index;
+              console.log("test start");
+              console.log(index);
+              console.log("end");
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    function deleteSchedule(_x) {
+      return _deleteSchedule.apply(this, arguments);
+    }
+
+    return deleteSchedule;
+  }(),
   methods: {
     fetchSchedules: function () {
       var _fetchSchedules = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.next = 2;
+                _context2.next = 2;
                 return axios.get('/api/schedule');
 
               case 2:
-                response = _context.sent;
+                response = _context2.sent;
                 this.schedules = response.data.data;
 
               case 4:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function fetchSchedules() {
@@ -2262,31 +2291,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     deleteSchedule: function () {
-      var _deleteSchedule = _asyncToGenerator(
+      var _deleteSchedule2 = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(index) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(schedule_id) {
         var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
-                return axios["delete"]('/api/schedule/{schedule_id}');
+                console.log("test start");
+                console.log(schedule_id);
+                console.log("end");
+                _context3.next = 5;
+                return axios["delete"]('/api/schedule' + schedule_id);
 
-              case 2:
-                response = _context2.sent;
-                this.schedules.splice(index, 1); //this.reload();
+              case 5:
+                response = _context3.sent;
+                this.schedules.splice(index, 1);
+                this.reload();
 
-              case 4:
+              case 8:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
-      function deleteSchedule(_x) {
-        return _deleteSchedule.apply(this, arguments);
+      function deleteSchedule(_x2) {
+        return _deleteSchedule2.apply(this, arguments);
       }
 
       return deleteSchedule;
@@ -2297,20 +2330,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       handler: function () {
         var _handler = _asyncToGenerator(
         /*#__PURE__*/
-        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context4.prev = _context4.next) {
                 case 0:
-                  _context3.next = 2;
+                  _context4.next = 2;
                   return this.fetchSchedules();
 
                 case 2:
                 case "end":
-                  return _context3.stop();
+                  return _context4.stop();
               }
             }
-          }, _callee3, this);
+          }, _callee4, this);
         }));
 
         function handler() {
@@ -36445,7 +36478,7 @@ var render = function() {
                     staticClass: "btn btn-danger",
                     on: {
                       click: function($event) {
-                        return _vm.deleteSchedule(index)
+                        return _vm.deleteSchedule(schedule.id)
                       }
                     }
                   },

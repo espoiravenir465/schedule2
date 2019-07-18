@@ -41,15 +41,14 @@ class ScheduleController extends Controller
 
     }
     
-    public function index()
-{
+    public function index(){
     $schedules = Schedule::with(['owner'])
         ->orderBy(Schedule::CREATED_AT, 'desc')->paginate();
-
     return $schedules;
 }
 
-   public function deleteSchedule(Request $request){  
+   public function deleteSchedule(Request $request){
+    \Log::info($request);
     $schedule = Schedule::where('id', $request->id)->delete();
     $schedules = Schedule::all();
     return $schedules;
