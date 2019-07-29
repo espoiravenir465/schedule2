@@ -31,4 +31,8 @@ Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
 //スケジュール新規作成
 Route::post('/schedule', 'ScheduleController@createSchedule')->name('schedule.create');
 //スケジュール削除
-Route::delete('schedule/{id}', 'ScheduleController@deleteSchedule');
+Route::delete('/schedule/{id}', 'ScheduleController@deleteSchedule'); 
+//スケジュール編集
+Route::patch('/schedule/{id}','ScheduleController@editSchedule');
+//イベント一覧
+Route::get('/{schedule_id}/events', 'ScheduleController@detail')->name('schedule.detail');

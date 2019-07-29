@@ -6,6 +6,7 @@ import Top from './pages/Top.vue'
 import Login from './pages/Login.vue'
 import SystemError from './pages/errors/System.vue'
 import Schedule from './pages/Schedule.vue'
+import Event from './pages/Event.vue'
 
 import store from './store'
 
@@ -36,6 +37,11 @@ const routes = [
     path: '/schedule',
     meta: { bodyClass: 'page-schedule' },
     component: Schedule
+  },
+  {
+    path: '/{schedule_id}/events',
+    meta: { bodyClass: 'page-event'},
+    component:Event
   },
   {
     path: '/500',

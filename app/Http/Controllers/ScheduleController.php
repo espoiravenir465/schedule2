@@ -13,18 +13,15 @@ use Illuminate\Support\Facades\DB;
 
 
 
-class ScheduleController extends Controller
-{
- public function __construct()
+class ScheduleController extends Controller{
+  public function __construct()
     {
         // 認証が必要
         $this->middleware('auth');
     }
 
-
-  
- public function createSchedule(StoreSchedule $request)
-  {     
+  public function createSchedule(StoreSchedule $request)
+    {     
         \Log::info($request);
         $schedule = new Schedule();
         $schedule->title = $request->get('title');
@@ -53,5 +50,15 @@ class ScheduleController extends Controller
     $schedules = Schedule::all();
     return $schedules;
   }
+  
+  public function editSchedule(int $id, int $schedule_id, editSchedule $request)
+  { 
+    \Log::info($request);
+    $schedule = Schedule::find($schedule_id);
+    $schedule->title = $request->input('title','');
+    $schedule->go_date = $request->input('go_date','');
+    $schedule->return_date = $request->input('return_date','');
+    $schedule->save();
+}
 
 }   

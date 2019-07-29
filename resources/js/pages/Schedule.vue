@@ -1,5 +1,6 @@
 <template>
   <div class="container" id="schedules">
+    <div class="schedule-container">
   <ScheduleForm  />
  <table class="table table-bordered">
 	<thead  class="thead-dark">
@@ -13,14 +14,15 @@
 	</thead>
 	<tbody>
 		<tr v-for="(schedule,index) in schedules">
-			<td>{{schedule.title}}</td>
-			<td>{{schedule.go_date}}</td>
-			<td>{{schedule.return_date}}</td>
-			<td align = "center" valign ="middle" ><button class="btn btn-primary">編集</button></td>
-			<td align = "center" valign ="middle" ><button class="btn btn-danger" v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
+			<td align = "center" valign ="middle"><router-link to="/${schedule_id}/events">{{schedule.title}}</router-link></td>
+			<td align = "center" valign ="middle">{{schedule.go_date}}</td>
+			<td align = "center" valign ="middle">{{schedule.return_date}}</td>
+			<td align = "center" valign ="middle" ><button class="btn btn-primary" v-on:click="edit(index)">編集</button></td>
+			<td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
 		</tr>
 	</tbody>
 </table>
+</div>
 </div>
 </template>
 
@@ -39,7 +41,7 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
     data () {
     return {
       schedules: [],
-      schedule_id: 0
+      schedule_id: 0,
     }},
     
     
@@ -53,21 +55,23 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
 		reload() {
             this.$router.go({path: this.$router.currentRoute.path, force: true});
         },
-		
-     async deleteSchedule({index}){
-      console.log("test start")
-      console.log(index)
-      console.log("end")},
       
      async deleteSchedule(schedule_id){
-       console.log("test start")
-       console.log(schedule_id)
-       console.log("end")  
-       const response = await axios.delete('/api/schedule'+schedule_id)
-       this.schedules.splice(index, 1)
-       this.reload();
+      console.log("test start")
+      console.log(schedule_id)
+      console.log("end")
+      const response = await axios.delete('/api/schedule/'+ schedule_id)
+      this.schedules.splice(this.index, 1)
+      this.reload();
       
-   }
+     },
+   
+   edit: function(index) {
+    this.editIndex = index;                         
+    this.schedule = this.list[index].schedule;         
+    this.created_at = this.list[index].created_at;  
+    this.$refs.editor.focus();                      
+  },
   },
 
 	
@@ -78,7 +82,9 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       },
       immediate: true
     }
-  }
+  },
+  
+  
     
 }
 

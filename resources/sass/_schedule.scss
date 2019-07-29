@@ -1,5 +1,29 @@
+.page-schedule {
+    /* 画像ファイルの指定 */
+     background-image:url("../img/direction.jpg");
+     /* 画像を常に天地左右の中央に配置 */
+     background-position: center center;
+     /* 画像をタイル状に繰り返し表示しない */
+     background-repeat: no-repeat;
+     /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
+     background-attachment: fixed;
+     /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
+     background-size: cover;
+     background-color: #f4f7f8;
+    }
+    
+    .schedule-container {
+        background:rgba(255,255,255,0.6);
+    }
+
+.btn-change {
+  text-align:right;
+}
+
+
+
 .thead-dark th{
-text-align: center;
-vertical-align: middle;
+ text-align: center;
+ vertical-align: middle;
 }
 
