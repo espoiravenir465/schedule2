@@ -1930,9 +1930,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         title: "",
         go_date: "",
         return_date: ""
-      },
-      editIndex: -1,
-      editflg: false
+      }
     };
   },
   methods: {
@@ -2012,11 +2010,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return editSchedule;
     }()
-  },
-  computed: {
-    changeButtonText: function changeButtonText() {
-      return this.editIndex === -1 ? "追加" : "編集";
-    }
   }
 });
 
@@ -2229,6 +2222,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -36016,7 +36010,6 @@ var render = function() {
                       expression: "schedule.title"
                     }
                   ],
-                  ref: "editor",
                   staticClass: "form-control",
                   attrs: { type: "string", placeholder: "Schedule Name" },
                   domProps: { value: _vm.schedule.title },
@@ -36043,7 +36036,6 @@ var render = function() {
                       expression: "schedule.go_date"
                     }
                   ],
-                  ref: "editor",
                   staticClass: "form-control",
                   attrs: { type: "date", placeholder: "Date" },
                   domProps: { value: _vm.schedule.go_date },
@@ -36070,7 +36062,6 @@ var render = function() {
                       expression: "schedule.return_date"
                     }
                   ],
-                  ref: "editor",
                   staticClass: "form-control",
                   attrs: { type: "date", placeholder: "Date" },
                   domProps: { value: _vm.schedule.return_date },
@@ -36085,23 +36076,7 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "btn-change" }, [
-                !_vm.editflg
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit" },
-                        on: {
-                          click: function($event) {
-                            _vm.editflg = true
-                          }
-                        }
-                      },
-                      [_vm._v(_vm._s(_vm.changeButtonText))]
-                    )
-                  : _vm._e()
-              ])
+              _vm._m(1)
             ]
           )
         ])
@@ -36116,6 +36091,18 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
       _c("h3", [_vm._v("スケジュール追加")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn-submit" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("追加")]
+      )
     ])
   }
 ]
@@ -36531,18 +36518,9 @@ var render = function() {
             "tbody",
             _vm._l(_vm.schedules, function(schedule, index) {
               return _c("tr", [
-                _c(
-                  "td",
-                  { attrs: { align: "center", valign: "middle" } },
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { to: "/${schedule_id}/events" } },
-                      [_vm._v(_vm._s(schedule.title))]
-                    )
-                  ],
-                  1
-                ),
+                _c("td", { attrs: { align: "center", valign: "middle" } }, [
+                  _vm._v(_vm._s(schedule.title))
+                ]),
                 _vm._v(" "),
                 _c("td", { attrs: { align: "center", valign: "middle" } }, [
                   _vm._v(_vm._s(schedule.go_date))
@@ -36552,20 +36530,22 @@ var render = function() {
                   _vm._v(_vm._s(schedule.return_date))
                 ]),
                 _vm._v(" "),
-                _c("td", { attrs: { align: "center", valign: "middle" } }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      on: {
-                        click: function($event) {
-                          return _vm.edit(index)
-                        }
-                      }
-                    },
-                    [_vm._v("編集")]
-                  )
-                ]),
+                _c(
+                  "td",
+                  { attrs: { align: "center", valign: "middle" } },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/${schedule_id}/events" } },
+                      [
+                        _c("button", { staticClass: "btn btn-primary" }, [
+                          _vm._v("詳細")
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c("td", { attrs: { align: "center", valign: "middle" } }, [
                   _c(
@@ -36584,6 +36564,14 @@ var render = function() {
               ])
             }),
             0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "save-button" }, [
+          _c(
+            "button",
+            { staticClass: "btn btn-success", on: { click: _vm.saveSchedule } },
+            [_vm._v("保存")]
           )
         ])
       ],
@@ -36604,7 +36592,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("帰着日")]),
         _vm._v(" "),
-        _c("th", [_vm._v("変更")]),
+        _c("th", [_vm._v("スケジュール詳細")]),
         _vm._v(" "),
         _c("th", [_vm._v("削除")])
       ])

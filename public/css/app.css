@@ -11080,14 +11080,19 @@ html {
 
 .schedule-container {
   background: rgba(255, 255, 255, 0.6);
+  padding: 10px;
 }
 
-.btn-change {
+.btn-submit {
   text-align: right;
 }
 
 .thead-dark th {
   text-align: center;
   vertical-align: middle;
+}
+
+.save-button {
+  text-align: right;
 }
 

@@ -8,20 +8,21 @@
 			<th>スケジュール名</th>
 			<th>出発日</th>
 			<th>帰着日</th>
-			<th>変更</th>
+			<th>スケジュール詳細</th>
 			<th>削除</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr v-for="(schedule,index) in schedules">
-			<td align = "center" valign ="middle"><router-link to="/${schedule_id}/events">{{schedule.title}}</router-link></td>
+			<td align = "center" valign ="middle">{{schedule.title}}</td>
 			<td align = "center" valign ="middle">{{schedule.go_date}}</td>
 			<td align = "center" valign ="middle">{{schedule.return_date}}</td>
-			<td align = "center" valign ="middle" ><button class="btn btn-primary" v-on:click="edit(index)">編集</button></td>
+			<td align = "center" valign ="middle" ><router-link to="/${schedule_id}/events"><button class="btn btn-primary">詳細</button></router-link></td>
 			<td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
 		</tr>
 	</tbody>
 </table>
+ <div class="save-button"><button class="btn btn-success" v-on:click="saveSchedule">保存</button></div>
 </div>
 </div>
 </template>

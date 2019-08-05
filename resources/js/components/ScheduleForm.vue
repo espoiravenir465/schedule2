@@ -9,16 +9,16 @@
 　 <div class="panel-body">
 　   <form class="form" @submit.prevent="createSchedule">
   　 <div class="form-group">
-      <span>スケジュール名</span> <input type="string"  ref="editor" class="form-control" placeholder="Schedule Name" v-model="schedule.title">
+      <span>スケジュール名</span> <input type="string" class="form-control" placeholder="Schedule Name" v-model="schedule.title">
      </div>
     <div class="form-group">
-     <span>出発日</span> <input type="date" ref="editor" class="form-control" placeholder="Date" v-model="schedule.go_date">
+     <span>出発日</span> <input type="date"  class="form-control" placeholder="Date" v-model="schedule.go_date">
     </div>
     <div class="form-group">
-     <span>帰着日</span> <input type="date" ref="editor" class="form-control" placeholder="Date" v-model="schedule.return_date">
+     <span>帰着日</span> <input type="date" class="form-control" placeholder="Date" v-model="schedule.return_date">
     </div>
-    <div class="btn-change">
-    <button v-if="!editflg" @click="(editflg = true)" class="btn btn-primary" type="submit">{{changeButtonText}}</button>
+    <div class="btn-submit">
+    <button class="btn btn-primary" type="submit">追加</button>
     </div>
     </form>
   </div>
@@ -36,8 +36,6 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       data(){
       return {
         schedule:{title:"",go_date:"",return_date:""},
-        editIndex: -1,
-        editflg: false,
       }
       },
       methods:{
@@ -70,11 +68,7 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
             
 
         },
-      computed: {
-         changeButtonText() {
-         return this.editIndex === -1 ? "追加" : "編集";
-    }
-},
+      
         
         
     }
