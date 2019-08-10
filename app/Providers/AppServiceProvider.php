@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+<<<<<<< HEAD
       \DB::listen(function ($query) {
+=======
+        \DB::listen(function ($query) {
+>>>>>>> 608b895d249cec115f1019fa9415be03593cb996
             $sql = $query->sql;
             for ($i = 0; $i < count($query->bindings); $i++) {
                 $sql = preg_replace("/\?/", $query->bindings[$i], $sql, 1);

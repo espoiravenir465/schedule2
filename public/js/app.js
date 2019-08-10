@@ -2306,12 +2306,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchSchedules;
     }(),
-    reload: function reload() {
-      this.$router.go({
-        path: this.$router.currentRoute.path,
-        force: true
-      });
-    },
+    //reload() {
+    //        this.$router.go({path: this.$router.currentRoute.path, force: true});
+    //    },
     deleteSchedule: function () {
       var _deleteSchedule = _asyncToGenerator(
       /*#__PURE__*/
@@ -2329,10 +2326,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
                 response = _context2.sent;
+<<<<<<< HEAD
                 this.schedules.splice(this.index, 1);
                 this.reload();
 
               case 8:
+=======
+                this.schedules.splice(index, 1); //  this.reload();
+
+              case 7:
+>>>>>>> 608b895d249cec115f1019fa9415be03593cb996
               case "end":
                 return _context2.stop();
             }
@@ -15777,8 +15780,13 @@ var DEPRECATION_MSG = 'Supplying a function to prop "filter" is deprecated. Use 
       if (Object(_utils_inspect__WEBPACK_IMPORTED_MODULE_3__["isFunction"])(filterFn)) {
         return filterFn;
       } // Deprecate setting `filter` prop to a function
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 608b895d249cec115f1019fa9415be03593cb996
       if (Object(_utils_inspect__WEBPACK_IMPORTED_MODULE_3__["isFunction"])(filter)) {
         /* istanbul ignore next */
         Object(_utils_warn__WEBPACK_IMPORTED_MODULE_2__["default"])("b-table: ".concat(DEPRECATION_MSG));
@@ -36635,6 +36643,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c(
+<<<<<<< HEAD
                   "td",
                   { attrs: { align: "center", valign: "middle" } },
                   [
@@ -36660,6 +36669,14 @@ var render = function() {
                         click: function($event) {
                           return _vm.deleteSchedule(schedule.id)
                         }
+=======
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteSchedule(schedule.id)
+>>>>>>> 608b895d249cec115f1019fa9415be03593cb996
                       }
                     },
                     [_vm._v("削除")]

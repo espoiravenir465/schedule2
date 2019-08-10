@@ -47,7 +47,11 @@ class ScheduleController extends Controller{
     return $schedules;
 }
 
+<<<<<<< HEAD
    public function deleteSchedule(Request $request){
+=======
+   public function deleteSchedule(Request $request){  
+>>>>>>> 608b895d249cec115f1019fa9415be03593cb996
     \Log::info($request);
     $schedule = Schedule::where('id', $request->id)->delete();
     $schedules = Schedule::all();

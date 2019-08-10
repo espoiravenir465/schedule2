@@ -14,6 +14,7 @@
 	</thead>
 	<tbody>
 		<tr v-for="(schedule,index) in schedules">
+<<<<<<< HEAD
 			<!-- <td align = "center" valign ="middle">{{schedule.title}}</td>-->
 			<td align = "center" valign ="middle">
 			  <div v-if="!schedule.title_edit" v-text="schedule.title" v-on:click="$set(schedule, 'title_edit', true)"></div>
@@ -29,6 +30,13 @@
 			</td>
 			<td align = "center" valign ="middle" ><router-link to="/${schedule_id}/events"><button class="btn btn-primary">詳細</button></router-link></td>
 			<td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
+=======
+			<td>{{schedule.title}}</td>
+			<td>{{schedule.go_date}}</td>
+			<td>{{schedule.return_date}}</td>
+			<td align = "center" valign ="middle" ><button class="btn btn-primary">編集</button></td>
+			<td align = "center" valign ="middle" ><button class="btn btn-danger" v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
+>>>>>>> 608b895d249cec115f1019fa9415be03593cb996
 		</tr>
 	</tbody>
 </table>
@@ -52,17 +60,24 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
     data () {
     return {
       schedules: [],
+<<<<<<< HEAD
       schedule_id: 0,
     }},
     
     
       
+=======
+      schedule_id: 0
+    }
+      },
+>>>>>>> 608b895d249cec115f1019fa9415be03593cb996
 	methods:{
 		async fetchSchedules (){
     	const response = await axios.get('/api/schedule')
     	this.schedules = response.data.data
 		},
 		
+<<<<<<< HEAD
 		reload() {
             this.$router.go({path: this.$router.currentRoute.path, force: true});
         },
@@ -83,6 +98,20 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
     this.created_at = this.list[index].created_at;  
     this.$refs.editor.focus();                      
   },
+=======
+		//reload() {
+    //        this.$router.go({path: this.$router.currentRoute.path, force: true});
+    //    },
+		
+   async deleteSchedule(schedule_id){
+     console.log("test start")
+     console.log(schedule_id)
+     console.log("end")
+      const response = await axios.delete('/api/schedule/'+ schedule_id)
+      this.schedules.splice(index, 1)
+    //  this.reload();
+   }
+>>>>>>> 608b895d249cec115f1019fa9415be03593cb996
   },
 
 	
