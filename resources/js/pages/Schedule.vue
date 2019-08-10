@@ -14,15 +14,25 @@
 	</thead>
 	<tbody>
 		<tr v-for="(schedule,index) in schedules">
-			<td align = "center" valign ="middle">{{schedule.title}}</td>
-			<td align = "center" valign ="middle">{{schedule.go_date}}</td>
-			<td align = "center" valign ="middle">{{schedule.return_date}}</td>
+			<!-- <td align = "center" valign ="middle">{{schedule.title}}</td>-->
+			<td align = "center" valign ="middle">
+			  <div v-if="!schedule.title_edit" v-text="schedule.title" v-on:click="$set(schedule, 'title_edit', true)"></div>
+        <input v-if="schedule.title_edit" type="text" v-model="schedule.title" v-on:blur="$set(schedule, 'title_edit', false)"  v-auto-focus>
+			</td>
+			<td align = "center" valign ="middle">
+			  <div v-if="!schedule.go_date_edit" v-text="schedule.go_date" v-on:click="$set(schedule, 'go_date_edit', true)"></div>
+        <input v-if="schedule.go_date_edit" type="text" v-model="schedule.go_date" v-on:blur="$set(schedule, 'go_date_edit', false)"  v-auto-focus>
+			</td>
+			<td align = "center" valign ="middle">
+			  <div v-if="!schedule.return_date_edit" v-text="schedule.return_date" v-on:click="$set(schedule, 'return_date_edit', true)"></div>
+        <input v-if="schedule.return_date_edit" type="text" v-model="schedule.return_date" v-on:blur="$set(schedule, 'return_date_edit', false)"  v-auto-focus>
+			</td>
 			<td align = "center" valign ="middle" ><router-link to="/${schedule_id}/events"><button class="btn btn-primary">詳細</button></router-link></td>
 			<td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
 		</tr>
 	</tbody>
 </table>
- <div class="save-button"><button class="btn btn-success" v-on:click="saveSchedule">保存</button></div>
+ <!--<div class="save-button"><button class="btn btn-success" v-on:click="saveSchedule">保存</button></div>-->
 </div>
 </div>
 </template>

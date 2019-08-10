@@ -34,6 +34,12 @@ class CreateSchedulesTable extends Migration
             $table->string('invite_user_id_4')->default("");
             //招待ユーザID5
             $table->string('invite_user_id_5')->default("");
+            //タイトル編集
+            $table->string('edit_title')->default(false);
+            //出発日編集
+            $table->string('edit_go_date')->default(false);
+            //帰着日編集
+            $table->string('edit_return_date')->default(false);
             //更新日
             $table->timestamps();
             
