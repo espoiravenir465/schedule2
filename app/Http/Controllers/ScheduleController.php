@@ -28,6 +28,9 @@ class ScheduleController extends Controller{
         $schedule->go_date=$request->get('go_date');
         $schedule->return_date=$request->get('return_date');
         $schedule->user_id = Auth::user()->id;
+        $schedule->edit_title = false;
+        $schedule->edit_go_date = false;
+        $schedule->edit_return_date = false;
  
         Auth::user()->schedules()->save($schedule);
         
@@ -44,7 +47,11 @@ class ScheduleController extends Controller{
     return $schedules;
 }
 
+<<<<<<< HEAD
    public function deleteSchedule(Request $request){
+=======
+   public function deleteSchedule(Request $request){  
+>>>>>>> 608b895d249cec115f1019fa9415be03593cb996
     \Log::info($request);
     $schedule = Schedule::where('id', $request->id)->delete();
     $schedules = Schedule::all();
