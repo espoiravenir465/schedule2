@@ -51,25 +51,6 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
              this.$router.push('/schedule')
              this.reload();
          },
-         
-            
-         
-            async editSchedule () {
-             const reponse =await axios.patch('/api/schedule/' + schedule_id, {
-                title: this.schedule.title,
-                go_date: this.schedule.go_date,
-                return_date:this.schedule.return_date
-            })
-            .then( (res) => {
-                console.log('update')
-            });                  
-         },
-
-            
-
         },
-      
-        
-        
     }
 </script>

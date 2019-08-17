@@ -14,15 +14,24 @@
 	</thead>
 	<tbody>
 		<tr v-for="(schedule,index) in schedules">
-			<td align = "center" valign ="middle">{{schedule.title}}</td>
-			<td align = "center" valign ="middle">{{schedule.go_date}}</td>
-			<td align = "center" valign ="middle">{{schedule.return_date}}</td>
+			<td align = "center" valign ="middle">
+			  <div v-if="!schedule.title_edit" v-text="schedule.title" v-on:click="$set(schedule, 'title_edit', true)"></div>
+        <input v-if="schedule.title_edit" type="text" v-model="schedule.title" v-on:blur="$set(schedule, 'title_edit', false)"  >
+			</td>
+			<td align = "center" valign ="middle">
+			  <div v-if="!schedule.go_date_edit" v-text="schedule.go_date" v-on:click="$set(schedule, 'go_date_edit', true)"></div>
+        <input v-if="schedule.go_date_edit" type="date" v-model="schedule.go_date" v-on:blur="$set(schedule, 'go_date_edit', false)"  >
+			</td>
+			<td align = "center" valign ="middle">
+			  <div v-if="!schedule.return_date_edit" v-text="schedule.return_date" v-on:click="$set(schedule, 'return_date_edit', true)"></div>
+        <input v-if="schedule.return_date_edit" type="date" v-model="schedule.return_date" v-on:blur="$set(schedule, 'return_date_edit', false)"  >
+			</td>
 			<td align = "center" valign ="middle" ><router-link to="/${schedule_id}/events"><button class="btn btn-primary">詳細</button></router-link></td>
 			<td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
 		</tr>
 	</tbody>
 </table>
- <div class="save-button"><button class="btn btn-success" v-on:click="saveSchedule">保存</button></div>
+ <div class="save-button"><button class="btn btn-success" v-on:click="editSchedule">保存</button></div>
 </div>
 </div>
 </template>
@@ -67,15 +76,22 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       
      },
    
-   edit: function(index) {
-    this.editIndex = index;                         
-    this.schedule = this.list[index].schedule;         
-    this.created_at = this.list[index].created_at;  
-    this.$refs.editor.focus();                      
-  },
+     edit: function() {
+        this.$set = false
+        this.$nextTick(function () { this.$refs.r1.focus() })
+      }, 
+      
+    async editSchedule () {
+      const reponse =await axios.patch('/api/schedule' + schedule_id, {
+      title: this.schedule.title_edit,
+      go_date: this.schedule.go_date_edit,
+      return_date:this.schedule.return_date_edit,
+      })
+      this.reload();
+      },                
   },
 
-	
+  
 	watch: {
     $route: {
       async handler () {
@@ -84,12 +100,8 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       immediate: true
     }
   },
-  
-  
     
 }
-
-  
 
 </script>
     

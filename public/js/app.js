@@ -1974,41 +1974,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return createSchedule;
-    }(),
-    editSchedule: function () {
-      var _editSchedule = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var reponse;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.patch('/api/schedule/' + schedule_id, {
-                  title: this.schedule.title,
-                  go_date: this.schedule.go_date,
-                  return_date: this.schedule.return_date
-                }).then(function (res) {
-                  console.log('update');
-                });
-
-              case 2:
-                reponse = _context2.sent;
-
-              case 3:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function editSchedule() {
-        return _editSchedule.apply(this, arguments);
-      }
-
-      return editSchedule;
     }()
   }
 });
@@ -2251,6 +2216,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2336,32 +2310,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return deleteSchedule;
     }(),
-    edit: function edit(index) {
-      this.editIndex = index;
-      this.schedule = this.list[index].schedule;
-      this.created_at = this.list[index].created_at;
-      this.$refs.editor.focus();
-    }
+    edit: function edit() {
+      this.$set = false;
+      this.$nextTick(function () {
+        this.$refs.r1.focus();
+      });
+    },
+    editSchedule: function () {
+      var _editSchedule = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var reponse;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.patch('/api/schedule' + schedule_id, {
+                  title: this.schedule.title_edit,
+                  go_date: this.schedule.go_date_edit,
+                  return_date: this.schedule.return_date_edit
+                });
+
+              case 2:
+                reponse = _context3.sent;
+                this.reload();
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function editSchedule() {
+        return _editSchedule.apply(this, arguments);
+      }
+
+      return editSchedule;
+    }()
   },
   watch: {
     $route: {
       handler: function () {
         var _handler = _asyncToGenerator(
         /*#__PURE__*/
-        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context4.prev = _context4.next) {
                 case 0:
-                  _context3.next = 2;
+                  _context4.next = 2;
                   return this.fetchSchedules();
 
                 case 2:
                 case "end":
-                  return _context3.stop();
+                  return _context4.stop();
               }
             }
-          }, _callee3, this);
+          }, _callee4, this);
         }));
 
         function handler() {
@@ -36519,15 +36527,124 @@ var render = function() {
             _vm._l(_vm.schedules, function(schedule, index) {
               return _c("tr", [
                 _c("td", { attrs: { align: "center", valign: "middle" } }, [
-                  _vm._v(_vm._s(schedule.title))
+                  !schedule.title_edit
+                    ? _c("div", {
+                        domProps: { textContent: _vm._s(schedule.title) },
+                        on: {
+                          click: function($event) {
+                            return _vm.$set(schedule, "title_edit", true)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  schedule.title_edit
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: schedule.title,
+                            expression: "schedule.title"
+                          }
+                        ],
+                        attrs: { type: "text" },
+                        domProps: { value: schedule.title },
+                        on: {
+                          blur: function($event) {
+                            return _vm.$set(schedule, "title_edit", false)
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(schedule, "title", $event.target.value)
+                          }
+                        }
+                      })
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("td", { attrs: { align: "center", valign: "middle" } }, [
-                  _vm._v(_vm._s(schedule.go_date))
+                  !schedule.go_date_edit
+                    ? _c("div", {
+                        domProps: { textContent: _vm._s(schedule.go_date) },
+                        on: {
+                          click: function($event) {
+                            return _vm.$set(schedule, "go_date_edit", true)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  schedule.go_date_edit
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: schedule.go_date,
+                            expression: "schedule.go_date"
+                          }
+                        ],
+                        attrs: { type: "date" },
+                        domProps: { value: schedule.go_date },
+                        on: {
+                          blur: function($event) {
+                            return _vm.$set(schedule, "go_date_edit", false)
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(schedule, "go_date", $event.target.value)
+                          }
+                        }
+                      })
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("td", { attrs: { align: "center", valign: "middle" } }, [
-                  _vm._v(_vm._s(schedule.return_date))
+                  !schedule.return_date_edit
+                    ? _c("div", {
+                        domProps: { textContent: _vm._s(schedule.return_date) },
+                        on: {
+                          click: function($event) {
+                            return _vm.$set(schedule, "return_date_edit", true)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  schedule.return_date_edit
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: schedule.return_date,
+                            expression: "schedule.return_date"
+                          }
+                        ],
+                        attrs: { type: "date" },
+                        domProps: { value: schedule.return_date },
+                        on: {
+                          blur: function($event) {
+                            return _vm.$set(schedule, "return_date_edit", false)
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              schedule,
+                              "return_date",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c(
@@ -36570,7 +36687,7 @@ var render = function() {
         _c("div", { staticClass: "save-button" }, [
           _c(
             "button",
-            { staticClass: "btn btn-success", on: { click: _vm.saveSchedule } },
+            { staticClass: "btn btn-success", on: { click: _vm.editSchedule } },
             [_vm._v("保存")]
           )
         ])
