@@ -62,6 +62,7 @@ class ScheduleController extends Controller{
     $schedule->go_date = $request->input('go_date','');
     $schedule->return_date = $request->input('return_date','');
     $schedule->save();
+    
 }
 
 }   

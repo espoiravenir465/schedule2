@@ -2319,18 +2319,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     editSchedule: function () {
       var _editSchedule = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(schedules) {
         var reponse;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios.patch('/api/schedule' + schedule_id, {
-                  title: this.schedule.title_edit,
-                  go_date: this.schedule.go_date_edit,
-                  return_date: this.schedule.return_date_edit
-                });
+                return axios.patch('/api/schedule', this.schedules);
 
               case 2:
                 reponse = _context3.sent;
@@ -2344,7 +2340,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3, this);
       }));
 
-      function editSchedule() {
+      function editSchedule(_x2) {
         return _editSchedule.apply(this, arguments);
       }
 
@@ -36687,7 +36683,14 @@ var render = function() {
         _c("div", { staticClass: "save-button" }, [
           _c(
             "button",
-            { staticClass: "btn btn-success", on: { click: _vm.editSchedule } },
+            {
+              staticClass: "btn btn-success",
+              on: {
+                click: function($event) {
+                  return _vm.editSchedule(_vm.schedules)
+                }
+              }
+            },
             [_vm._v("保存")]
           )
         ])

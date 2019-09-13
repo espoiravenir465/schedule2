@@ -31,7 +31,7 @@
 		</tr>
 	</tbody>
 </table>
- <div class="save-button"><button class="btn btn-success" v-on:click="editSchedule">保存</button></div>
+ <div class="save-button"><button class="btn btn-success" v-on:click="editSchedule(schedules)">保存</button></div>
 </div>
 </div>
 </template>
@@ -81,12 +81,10 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
         this.$nextTick(function () { this.$refs.r1.focus() })
       }, 
       
-    async editSchedule () {
-      const reponse =await axios.patch('/api/schedule' + schedule_id, {
-      title: this.schedule.title_edit,
-      go_date: this.schedule.go_date_edit,
-      return_date:this.schedule.return_date_edit,
-      })
+    async editSchedule (schedules) {
+      const reponse =await axios.patch('/api/schedule', 
+      this.schedules
+      )
       this.reload();
       },                
   },
@@ -102,7 +100,6 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
   },
     
 }
-
 </script>
     
   
