@@ -48,21 +48,23 @@ class ScheduleController extends Controller{
 }
 
    public function deleteSchedule(Request $request){
+    \Log::info("delete");
     \Log::info($request);
     $schedule = Schedule::where('id', $request->id)->delete();
     $schedules = Schedule::all();
     return $schedules;
   }
   
-  public function editSchedule(int $id, int $schedule_id, editSchedule $request)
-  { 
-    \Log::info($request);
-    $schedule = Schedule::find($schedule_id);
-    $schedule->title = $request->input('title','');
-    $schedule->go_date = $request->input('go_date','');
-    $schedule->return_date = $request->input('return_date','');
-    $schedule->save();
-    
-}
+ public function editSchedule(Request $request)
+  {
+    \Log::info("edit");
+    //\Log::info($request->all());
+    $schedules = $request->all();
+    foreach ($schedules as $schedule) {
+      \Log::info($schedule);
+      \Log::info($schedule['title']);
+      Schedule::where('id', $schedule['id'])->update(['title' => $schedule['title']],['go_date' => $schedule['go_date']],['return_date' => $schedule['return_date']]);
+    }
 
-}   
+  }
+}

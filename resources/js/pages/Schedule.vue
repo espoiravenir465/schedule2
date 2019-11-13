@@ -26,7 +26,7 @@
 			  <div v-if="!schedule.return_date_edit" v-text="schedule.return_date" v-on:click="$set(schedule, 'return_date_edit', true)"></div>
         <input v-if="schedule.return_date_edit" type="date" v-model="schedule.return_date" v-on:blur="$set(schedule, 'return_date_edit', false)"  >
 			</td>
-			<td align = "center" valign ="middle" ><router-link to="/${schedule_id}/events"><button class="btn btn-primary">詳細</button></router-link></td>
+			<td align = "center" valign ="middle" ><router-link to="/{schedule_id}/events"><button class="btn btn-primary">詳細</button></router-link></td>
 			<td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
 		</tr>
 	</tbody>
