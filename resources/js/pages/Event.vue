@@ -3,7 +3,12 @@
  <div class="event-container">
   <EventForm  />
   <div class="event-periode">
- 日付
+  	<div class="event-date">
+  	イベント日付
+  	</div>
+  <v-date-picker :mode="mode"
+               :formats="formats"
+               v-model="selectedDate"></v-date-picker>
   </div>
   <table class="table bordered break-all">
 	<thead  class="thead-dark">
@@ -11,7 +16,7 @@
 			<th>開始時間</th>
 			<th>終了時間</th>
 			<th>イベント名</th>
-			<th>コメント</th>
+			<th>詳細</th>
 			<th>削除</th>
 		</tr>
 	</thead>
@@ -29,11 +34,7 @@
 			  <div v-if="!event.title_edit" v-text="event.title" v-on:click="$set(event, 'title_edit', true)"></div>
         <input v-if="event.title_edit" type="text" v-model="event.title" v-on:blur="$set(event, 'title_edit', false)"  >
 			</td>
-			<td align = "center" valign ="middle">
-			  <div v-if="!comment_edit" v-text="comment" v-on:click="$set( 'comment_edit', true)"></div>
-        <input v-if="comment_edit" type="text" v-model="comment" v-on:blur="$set('comment_edit', false)"  >
-			</td>
-			<td align = "center" valign ="middle" ><router-link to="/{schedule_id}/events"><button class="btn btn-primary">詳細</button></router-link></td>
+			<td align = "center" valign ="middle" ><router-link to="/{schedule_id}/{event_id}"><button class="btn btn-primary">詳細</button></router-link></td> 
 			<td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
 		</tr>
 	</tbody>
@@ -58,6 +59,11 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
     data () {
     return {
       events: [],
+      mode: 'single',
+    　formats: {
+       input: ['YYYY-MM-DD'],
+    },
+    selectedDate: null,
     }},
   }
   

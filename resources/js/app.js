@@ -11,6 +11,10 @@ import BodyClass from 'vue-body-class'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import VCalendar from 'v-calendar';
+Vue.use(VCalendar);
+ 
+
 
 const createApp = async () => {
   await store.dispatch('auth/currentUser')

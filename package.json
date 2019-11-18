@@ -28,7 +28,8 @@
         "vuex": "^3.1.1"
     },
     "dependencies": {
-       "v-calendar": "^1.0.0-beta.22",
-       "vue-body-class": "^2.0.0-beta.2"
+        "bootstrap-vue": "^2.1.0",
+        "v-calendar": "^1.0.0-beta.22",
+        "vue-body-class": "^2.0.0-beta.2"
     }
 }
