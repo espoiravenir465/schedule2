@@ -9,13 +9,13 @@
 　 <div class="panel-body">
 　  <form class="form" @submit.prevent="createEvent">
     <div class="form-group">
-     <span>日付</span> <input type="date"  class="form-control" placeholder="Date" v-model="event.date">
+     <span>日付</span> <input type="date" class="form-control" placeholder="Date" v-model="event.date">
     </div>
     <div class="form-group">
-     <span>開始時間</span> <input type="time" class="form-control" placeholder="Time" v-model="event.start">
+     <span>開始時間</span> <input type="time" step="900" value="00:00" class="form-control" placeholder="Time" v-model="event.start">
     </div>
     <div class="form-group">
-     <span>終了時間</span> <input type="time" class="form-control" placeholder="Time" v-model="event.end">
+     <span>終了時間</span> <input type="time" step="900" value="00:00" class="form-control" placeholder="Time" v-model="event.end">
     </div>
     <div class="form-group">
       <span>イベント名</span> <input type="string" class="form-control" placeholder="Event Name" v-model="event.title">
@@ -28,20 +28,19 @@
  </div>
 </div>
 </div>
-    
+
 </template>
 
 <script>
 import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
 
   export default {
-     
+
       data(){
       return {
-        event:{title:"",date:"",start:"",end:""},
-        comment:""
+        event:{title:"",date:"",start:"",end:""}
       }
       }
   }
-  
-</script> 
+
+</script>
