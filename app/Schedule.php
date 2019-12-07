@@ -15,4 +15,13 @@ class Schedule extends Model
     {
       return $this->belongsTo('App\User', 'user_id', 'id', 'users');
     }
+
+    /**
+     * リレーションシップ - eventテーブル
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function events()
+    {
+        return $this->hasMany('App\Event')->orderBy('id', 'desc');
+    }
 }

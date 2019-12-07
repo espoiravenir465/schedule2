@@ -35,6 +35,8 @@ Route::delete('/schedule/{id}', 'ScheduleController@deleteSchedule');
 //スケジュール編集
 Route::patch('/schedule/{id}','ScheduleController@editSchedule');
 //イベント一覧
-Route::get('/{schedule_id}/events', 'ScheduleController@Eventindex')->name('event.index');
+Route::get('/{schedule_id}/events', 'EventController@index')->name('event.index');
 //イベント詳細
-Route::get('/{schedule_id}/{event_id}', 'ScheduleController@Eventdetail')->name('event.detail');
+Route::get('/{schedule_id}/event/{event_id}', 'ScheduleController@Eventdetail')->name('event.detail');
+//イベント作成
+Route::post('/event/{id}', 'EventController@createEvent')->name('event.create');

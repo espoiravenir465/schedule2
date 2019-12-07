@@ -4,7 +4,7 @@
       <Photo
         class="grid__item"
         v-for="schedule in scheules"
-        :key="schedule.id"
+        :key="id"
         :item="schedule"
       />
     </div>

@@ -40,14 +40,15 @@ const routes = [
     component: Schedule
   },
   {
-    path: '/{schedule_id}/events',
+    path: '/:id/events',
     meta: { bodyClass: 'page-event'},
-    component:Event
+    component:Event,
+    props: true
   },
   {
-    path: '/{schedule_id}/{event_id}',
+    path: '/schedule_id/event/{event_id}',
     meta: { bodyClass: 'page-eventdetail'},
-    component:EventDetail
+    component:EventDetail,
   },
   {
     path: '/500',
