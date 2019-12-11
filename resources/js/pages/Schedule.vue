@@ -13,7 +13,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr v-for="(schedule,index) in schedules">
+		<tr v-for="(schedule,id) in schedules" :key="id">
 			<td align = "center" valign ="middle">
 			  <div v-if="!schedule.title_edit" v-text="schedule.title" v-on:click="$set(schedule, 'title_edit', true)"></div>
         <input v-if="schedule.title_edit" type="text" v-model="schedule.title" v-on:blur="$set(schedule, 'title_edit', false)"  >
@@ -26,7 +26,7 @@
 			  <div v-if="!schedule.return_date_edit" v-text="schedule.return_date" v-on:click="$set(schedule, 'return_date_edit', true)"></div>
         <input v-if="schedule.return_date_edit" type="date" v-model="schedule.return_date" v-on:blur="$set(schedule, 'return_date_edit', false)"  >
 			</td>
-			<td align = "center" valign ="middle" ><router-link to="/{schedule_id}/events"><button class="btn btn-primary">詳細</button></router-link></td>
+			<td align = "center" valign ="middle" ><router-link :to="`/${schedule.id}/events`"><button class="btn btn-primary">詳細</button></router-link></td>
 			<td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除</button></td>
 		</tr>
 	</tbody>
