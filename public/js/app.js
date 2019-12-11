@@ -1808,8 +1808,7 @@ __webpack_require__.r(__webpack_exports__);
         date: "",
         start: "",
         end: ""
-      },
-      comment: ""
+      }
     };
   }
 });
@@ -2052,14 +2051,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_EventForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/EventForm.vue */ "./resources/js/components/EventForm.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -36687,7 +36678,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "time", placeholder: "Time" },
+                  attrs: {
+                    type: "time",
+                    step: "900",
+                    value: "00:00",
+                    placeholder: "Time"
+                  },
                   domProps: { value: _vm.event.start },
                   on: {
                     input: function($event) {
@@ -36713,7 +36709,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "time", placeholder: "Time" },
+                  attrs: {
+                    type: "time",
+                    step: "900",
+                    value: "00:00",
+                    placeholder: "Time"
+                  },
                   domProps: { value: _vm.event.end },
                   on: {
                     input: function($event) {
@@ -37053,28 +37054,6 @@ var render = function() {
       [
         _c("EventForm"),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "event-periode" },
-          [
-            _c("div", { staticClass: "event-date" }, [
-              _vm._v("\n  \tイベント日付\n  \t")
-            ]),
-            _vm._v(" "),
-            _c("v-date-picker", {
-              attrs: { mode: _vm.mode, formats: _vm.formats },
-              model: {
-                value: _vm.selectedDate,
-                callback: function($$v) {
-                  _vm.selectedDate = $$v
-                },
-                expression: "selectedDate"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
         _c("table", { staticClass: "table bordered break-all" }, [
           _vm._m(0),
           _vm._v(" "),
@@ -37104,7 +37083,7 @@ var render = function() {
                             expression: "event.start"
                           }
                         ],
-                        attrs: { type: "time" },
+                        attrs: { type: "time", step: "900", value: "00:00" },
                         domProps: { value: event.start },
                         on: {
                           blur: function($event) {
@@ -37143,7 +37122,7 @@ var render = function() {
                             expression: "event.end"
                           }
                         ],
-                        attrs: { type: "time" },
+                        attrs: { type: "time", step: "900", value: "00:00" },
                         domProps: { value: event.end },
                         on: {
                           blur: function($event) {
@@ -55083,8 +55062,8 @@ var UNPROCESSABLE_ENTITY = 422;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/ec2-user/environment/schedule2/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/ec2-user/environment/schedule2/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/emi-h/schedule2/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/emi-h/schedule2/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -25,9 +25,11 @@
             </form>
           </div>
       </div>
+
     </div>
   </div>
-    
+
+
 </template>
 
 <script>
@@ -63,7 +65,8 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
           //this.$router.push('/event/' + this.$route.params.id)
           this.reload();
         }
+
       }
   }
-  
-</script> 
+
+</script>
