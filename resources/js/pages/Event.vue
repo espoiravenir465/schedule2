@@ -3,13 +3,9 @@
     <div class="event-container">
       <EventForm  id="`${schedule.id}`" />
       <div class="event-periode">
-  	    <div class="event-date">
-  	      イベント日付
-  	    </div>
-        <v-date-picker :mode="mode"
-               :formats="formats"
-               v-model="selectedDate">
-        </v-date-picker>
+      <div class="event-date">
+  	    <v-calendar :columns="$screens({ default: 1, lg: 2 })" :attributes='attrs' /></v-calendar>
+      </div>
       </div>
       <table class="table bordered break-all">
 	      <thead  class="thead-dark">
@@ -39,7 +35,7 @@
               <router-link to="/{schedule_id}/{event_id}">
                 <button class="btn btn-primary">詳細</button>
               </router-link>
-            </td> 
+            </td>
 			      <td align = "center" valign ="middle" >
               <button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除
               </button>
@@ -76,6 +72,13 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
           input: ['YYYY-MM-DD'],
         },
         selectedDate: null,
+        attrs: [
+        {
+          key: 'today',
+          highlight: true,
+          dates: new Date(),
+        },
+      ],
       }
 	},
 	methods:{
@@ -91,7 +94,7 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       },
 	  reload() {
         this.$router.go({path: this.$router.currentRoute.path, force: true});
-      }        
+      }
     },
     watch: {
     $route: {
@@ -103,4 +106,3 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
   }
   }
   </script>
-
