@@ -12,10 +12,15 @@ class EventController extends Controller
 {
   public function index(Request $request)
   {
-    \Log::info("event1");
     \Log::info($request->id);
     $events = Event::where('schedule_id', $request->id)->orderBy(Event::CREATED_AT, 'desc')->paginate();
-    //$events = Event::where('schedule_id',1)->orderBy(Event::CREATED_AT, 'desc')->paginate();
+    return $events;
+  }
+  public function dateindex(Request $request)
+  {
+    \Log::info("event1");
+    \Log::info($request->id);
+    $events = Event::where('schedule_id', $request->id)->where('event_date', $request->date)->orderBy(Event::CREATED_AT, 'desc')->paginate();
     \Log::info("event2");
     return $events;
   }

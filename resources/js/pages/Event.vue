@@ -4,7 +4,13 @@
       <EventForm  id="`${schedule.id}`" />
       <div class="event-periode">
       <div class="event-date">
-  	    <v-calendar :columns="$screens({ default: 1, lg: 2 })" :attributes='attrs' /></v-calendar>
+  	    <v-date-picker 
+          :mode="mode" 
+          v-model="selectedDate"
+          :is-inline=true
+          :columns="$screens({ default: 1, lg: 2 })"
+          @input="fetchDateEvent" >
+        </v-date-picker>
       </div>
       </div>
       <table class="table bordered break-all">
@@ -92,6 +98,14 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
         const reponse =await axios.post('/event/'+ schedule_id, this.events)
         this.reload();
       },
+      async fetchDateEvent(selectedDate) {
+        var testdate = selectedDate.getFullYear() + toDoubleDigits(selectedDate.getMonth() + 1) + toDoubleDigits(selectedDate.getDate())
+        console.log(testdate)
+        const response = await axios.get('/api/'+ this.$route.params.id +'/events/'+ testdate +'?id=' + this.$route.params.id + '&date=' + testdate)
+        this.events = response.data.data
+        console.log(response)
+        console.log("test")
+      },
 	  reload() {
         this.$router.go({path: this.$router.currentRoute.path, force: true});
       }
@@ -104,5 +118,12 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       immediate: true
     }
   }
+  }
+  var toDoubleDigits = function(num) {
+    num += "";
+    if (num.length === 1) {
+      num = "0" + num;
+    }
+    return num;     
   }
   </script>
