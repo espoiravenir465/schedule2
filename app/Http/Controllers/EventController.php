@@ -12,15 +12,20 @@ class EventController extends Controller
 {
   public function index(Request $request)
   {
-    \Log::info("event1");
     \Log::info($request->id);
     $events = Event::where('schedule_id', $request->id)->orderBy(Event::CREATED_AT, 'desc')->paginate();
-    //$events = Event::where('schedule_id',1)->orderBy(Event::CREATED_AT, 'desc')->paginate();
+    return $events;
+      }
+  public function dateindex(Request $request)
+  {
+    \Log::info("event1");
+    \Log::info($request->id);
+    $events = Event::where('schedule_id', $request->id)->where('event_date', $request->date)->orderBy(Event::CREATED_AT, 'desc')->paginate();
     \Log::info("event2");
     return $events;
   }
   public function createEvent(Schedule $schedule, Request $request)
-  {     
+  {
     \Log::info("controller");
     \Log::info($request->get('schedule_id'));
     \Log::info($request);
@@ -40,4 +45,32 @@ class EventController extends Controller
     $new_event = Event::where('event_id', $event->event_id)->first();
     return response($new_event, 201);
   }
+  public function deleteEvent(Request $request)
+  {
+    \Log::info("delete");
+    \Log::info($request);
+    $event = Event::where('event_id', $request->event_id)->delete();
+    $events = Event::all();
+    return $events;
+  }
+  public function editEvent(Request $request)
+  {
+    \Log::info("edit");
+    //\Log::info($request->all());
+    $events = $request->all();
+    foreach ($events as $event)
+    {
+      \Log::info($event);
+      \Log::info($event['event_title']);
+      Event::where('id', $event['id'])->update(['event_title' => $event['event_title']],['event_start' => $event['event_start']],['event_end' => $event['event_end']]);
+    }
+  }
+  public function Eventdetailindex(Request $request)
+  {
+    \Log::info($request->id);
+    $events = Event::where('schedule_id', $request->id)->where('event_tite', $request->title)->orderBy(Event::CREATED_AT, 'desc')->paginate();
+    return $events;
+      }
+
+
 }

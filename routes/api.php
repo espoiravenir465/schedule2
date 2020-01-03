@@ -31,12 +31,18 @@ Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
 //スケジュール新規作成
 Route::post('/schedule', 'ScheduleController@createSchedule')->name('schedule.create');
 //スケジュール削除
-Route::delete('/schedule/{id}', 'ScheduleController@deleteSchedule'); 
+Route::delete('/schedule/{id}', 'ScheduleController@deleteSchedule');
 //スケジュール編集
 Route::patch('/schedule/{id}','ScheduleController@editSchedule');
 //イベント一覧
 Route::get('/{schedule_id}/events', 'EventController@index')->name('event.index');
+//日付ごとのイベント一覧
+Route::get('/{schedule_id}/events/{date}', 'EventController@dateindex')->name('event.dateindex');
 //イベント詳細
-Route::get('/{schedule_id}/event/{event_id}', 'ScheduleController@Eventdetail')->name('event.detail');
+Route::get('/{schedule_id}/{event_id}', 'EventController@Eventdetailindex')->name('event.detail');
 //イベント作成
 Route::post('/event/{id}', 'EventController@createEvent')->name('event.create');
+//イベント削除
+Route::delete('{schedule_id}/events/{id}', 'EventController@deleteEvent');
+//イベント編集
+Route::patch('{schedule_id}/events/{id}','EventController@editEvent');

@@ -46,9 +46,11 @@ const routes = [
     props: true
   },
   {
-    path: '/schedule_id/event/{event_id}',
+    path: '/:id/:event_id',
     meta: { bodyClass: 'page-eventdetail'},
+    name:'EventDetail',
     component:EventDetail,
+    props:true
   },
   {
     path: '/500',

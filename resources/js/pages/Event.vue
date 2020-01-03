@@ -4,7 +4,13 @@
       <EventForm  id="`${schedule.id}`" />
       <div class="event-periode">
       <div class="event-date">
-  	    <v-calendar :columns="$screens({ default: 1, lg: 2 })" :attributes='attrs' /></v-calendar>
+      <v-date-picker
+        :mode="mode"
+        v-model="selectedDate"
+        :is-inline=true
+        :columns="$screens({ default: 1, lg: 2 })"
+        @input="fetchDateEvent" >
+      </v-date-picker>
       </div>
       </div>
       <table class="table bordered break-all">
@@ -32,19 +38,19 @@
               <input v-if="event.title_edit" type="text" v-model="event.title" v-on:blur="$set(event, 'title_edit', false)"  >
 			      </td>
 			      <td align = "center" valign ="middle" >
-              <router-link to="/{schedule_id}/{event_id}">
+              <router-link :to="`/${schedule.id}/${event.id}`">
                 <button class="btn btn-primary">詳細</button>
               </router-link>
             </td>
 			      <td align = "center" valign ="middle" >
-              <button class="btn btn-danger"  v-on:click="deleteSchedule(schedule.id)" >削除
+              <button class="btn btn-danger"  v-on:click="deleteEvent(event.id)" >削除
               </button>
             </td>
 		      </tr>
 	      </tbody>
       </table>
       <div class="save-button">
-        <button class="btn btn-success" v-on:click="createEvent(events)">保存</button>
+        <button class="btn btn-success" v-on:click="editEvent(events)">保存</button>
       </div>
     </div>
   </div>
@@ -91,10 +97,36 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       async createEvent(events) {
         const reponse =await axios.post('/event/'+ schedule_id, this.events)
         this.reload();
+        },
+     async fetchDateEvent(selectedDate) {
+       var testdate = selectedDate.getFullYear() + toDoubleDigits(selectedDate.getMonth() + 1) + toDoubleDigits(selectedDate.getDate())
+       console.log(testdate)
+       const response = await axios.get('/api/'+ this.$route.params.id +'/events/'+ testdate +'?id=' + this.$route.params.id + '&date=' + testdate)
+       this.events = response.data.data
+       console.log(response)
+       console.log("test")
       },
 	  reload() {
         this.$router.go({path: this.$router.currentRoute.path, force: true});
-      }
+      },
+    async deleteEvent(event_id){
+      console.log("test start")
+      console.log(event_id)
+      console.log("end")
+      const response = await axios.delete('/api/'+ this.$route.params.id + event_id)
+      this.events.splice(this.index, 1)
+      this.reload();
+      },
+    edit: function() {
+        this.$set = false
+        this.$nextTick(function () { this.$refs.r1.focus() })
+       },
+
+    async editEvent (events) {
+       const reponse =await axios.patch('/api/'+ this.$route.params.id, this.events)
+       this.reload();
+       },
+
     },
     watch: {
     $route: {
@@ -104,5 +136,12 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       immediate: true
     }
   }
+  }
+  var toDoubleDigits = function(num) {
+    num += "";
+    if (num.length === 1) {
+      num = "0" + num;
+    }
+    return num;
   }
   </script>
