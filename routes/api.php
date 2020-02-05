@@ -43,6 +43,22 @@ Route::get('/{schedule_id}/{event_id}', 'EventController@Eventdetailindex')->nam
 //イベント作成
 Route::post('/event/{id}', 'EventController@createEvent')->name('event.create');
 //イベント削除
-Route::delete('{schedule_id}/events/{id}', 'EventController@deleteEvent');
+Route::delete('/{schedule_id}/events/{id}', 'EventController@deleteEvent');
 //イベント編集
-Route::patch('{schedule_id}/events/{id}','EventController@editEvent');
+Route::patch('/{schedule_id}/events/{id}','EventController@editEvent');
+//写真一覧
+Route::get('/{schedule_id}/{event_id}/photos','PhotoController@Photoindex');
+//写真投稿
+Route::post('/{schedule_id}/{event_id}/photos','PhotoController@createPhoto');
+//写真詳細
+Route::get('{schedule_id}/{event_id}/{photo_id}','PhotoController@Photodetail');
+//写真削除
+Route::delete('/{schedule_id}/{event_id}/{photo_id}','PhotoController@deletePhoto');
+//コメント表示
+Route::get('/{schedule_id}/{event_id}/comments','EventController@Commentindex');
+//コメント投稿
+Route::post('{schedule_id}/{event_id}/comments','EventController@createComment');
+//コメント編集
+Route::patch('/{schedule_id}/{event_id}/{comment_id}','EventController@editComment');
+//コメント削除
+Route::delete('/{schedule_id}/{event_id}/{comment_id}','EventController@deleteComment');

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="event-container">
-      <EventForm  id="`${schedule.id}`" />
+      <EventForm  id="${schedule_id}" />
       <div class="event-periode">
       <div class="event-date">
       <v-date-picker
@@ -38,7 +38,7 @@
               <input v-if="event.title_edit" type="text" v-model="event.title" v-on:blur="$set(event, 'title_edit', false)"  >
 			      </td>
 			      <td align = "center" valign ="middle" >
-              <router-link :to="`/${schedule.id}/${event.id}`">
+              <router-link :to="`/${schedule_id}/${event_id}`">
                 <button class="btn btn-primary">詳細</button>
               </router-link>
             </td>

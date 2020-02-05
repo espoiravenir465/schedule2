@@ -11124,3 +11124,26 @@ html {
   margin-left: 300px;
 }
 
+.page-eventdetail {
+  /* 画像ファイルの指定 */
+  background-image: url(/images/voyage.jpg?2c33710a0fb67195f12fbd6a451a56d3);
+  /* 画像を常に天地左右の中央に配置 */
+  background-position: center center;
+  /* 画像をタイル状に繰り返し表示しない */
+  background-repeat: no-repeat;
+  /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
+  background-attachment: fixed;
+  /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
+  background-size: cover;
+  background-color: #f4f7f8;
+}
+
+.event-detail {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+}
+
+.btn-submit {
+  text-align: right;
+}
+

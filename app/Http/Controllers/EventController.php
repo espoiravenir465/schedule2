@@ -72,5 +72,22 @@ class EventController extends Controller
     return $events;
       }
 
+  public function createComment(Event $event, Request $request)
+      {
+        \Log::info("controller");
+        \Log::info($request->get('event_id'));
+        \Log::info($request);
+        $comment = new Comment();
+        $Event = Event::where('id', $request->get('event_id'));
+        $comment->event_id=$request->get('event_id');
+        $comment->comment=$request->get('comment');
+        \Log::info($comment);
+        \Log::info("test1");
+        //\Log::info($schedule);
+        \Log::info("test2");
+        $comment->save();
+        $new_comment= Comment::where('comment_id', $comment->comment_id)->first();
+        return response($new_comment, 201);
+      }
 
 }
