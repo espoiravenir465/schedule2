@@ -33,8 +33,5 @@ class User extends Authenticatable
         return $this->hasMany('App\Schedule');
     }
 
-    public function photos()
-    {
-    return $this->hasMany('App\Photo');
-    }
+    
 }
