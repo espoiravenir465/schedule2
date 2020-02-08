@@ -26,11 +26,11 @@
 	      <tbody>
 		      <tr v-for="(event,event_id) in events" :key="event_id">
 		        <td align = "center" valign ="middle">
-			        <div v-if="!event.start_edit" v-text="event.event_start" v-on:click="$set(event, 'start_edit', true)"></div>
+            <div v-if="!event.start_edit" v-text="event.event_start" v-on:click="$set(event, 'start_edit', true)">{{event.event_start.slice(0,5)}}</div>
               <input v-if="event.start_edit" type="time" v-model="event.start" v-on:blur="$set(event, 'start_edit', false)"  >
 			      </td>
 			      <td align = "center" valign ="middle">
-			        <div v-if="!event.end" v-text="event.event_end" v-on:click="$set(event, 'end_edit', true)"></div>
+			        <div v-if="!event.end_edit" v-text="event.event_end" v-on:click="$set(event, 'end_edit', true)">{{event.event_end.slice(0,5)}}</div>
               <input v-if="event.end_edit" type="time" v-model="event.end" v-on:blur="$set(event, 'end_edit', false)"  >
 			      </td>
 			      <td align = "center" valign ="middle">

@@ -37889,14 +37889,18 @@ var render = function() {
               return _c("tr", { key: event_id }, [
                 _c("td", { attrs: { align: "center", valign: "middle" } }, [
                   !event.start_edit
-                    ? _c("div", {
-                        domProps: { textContent: _vm._s(event.event_start) },
-                        on: {
-                          click: function($event) {
-                            return _vm.$set(event, "start_edit", true)
+                    ? _c(
+                        "div",
+                        {
+                          domProps: { textContent: _vm._s(event.event_start) },
+                          on: {
+                            click: function($event) {
+                              return _vm.$set(event, "start_edit", true)
+                            }
                           }
-                        }
-                      })
+                        },
+                        [_vm._v(_vm._s(event.event_start.slice(0, 5)))]
+                      )
                     : _vm._e(),
                   _vm._v(" "),
                   event.start_edit
@@ -37927,15 +37931,19 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { attrs: { align: "center", valign: "middle" } }, [
-                  !event.end
-                    ? _c("div", {
-                        domProps: { textContent: _vm._s(event.event_end) },
-                        on: {
-                          click: function($event) {
-                            return _vm.$set(event, "end_edit", true)
+                  !event.end_edit
+                    ? _c(
+                        "div",
+                        {
+                          domProps: { textContent: _vm._s(event.event_end) },
+                          on: {
+                            click: function($event) {
+                              return _vm.$set(event, "end_edit", true)
+                            }
                           }
-                        }
-                      })
+                        },
+                        [_vm._v(_vm._s(event.event_end.slice(0, 5)))]
+                      )
                     : _vm._e(),
                   _vm._v(" "),
                   event.end_edit
