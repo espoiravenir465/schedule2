@@ -26,11 +26,11 @@
 	      <tbody>
 		      <tr v-for="(event,event_id) in events" :key="event_id">
 		        <td align = "center" valign ="middle">
-            <div v-if="!event.start_edit" v-text="event.event_start" v-on:click="$set(event, 'start_edit', true)">{{event.event_start.slice(0,5)}}</div>
+            <div v-if="!event.start_edit"  v-on:click="$set(event, 'start_edit', true)">{{event.event_start.slice(0,5)}}</div>
               <input v-if="event.start_edit" type="time" v-model="event.start" v-on:blur="$set(event, 'start_edit', false)"  >
 			      </td>
 			      <td align = "center" valign ="middle">
-			        <div v-if="!event.end_edit" v-text="event.event_end" v-on:click="$set(event, 'end_edit', true)">{{event.event_end.slice(0,5)}}</div>
+			        <div v-if="!event.end_edit"  v-on:click="$set(event, 'end_edit', true)">{{event.event_end.slice(0,5)}}</div>
               <input v-if="event.end_edit" type="time" v-model="event.end" v-on:blur="$set(event, 'end_edit', false)"  >
 			      </td>
 			      <td align = "center" valign ="middle">
@@ -43,7 +43,7 @@
               </router-link>
             </td>
 			      <td align = "center" valign ="middle" >
-              <button class="btn btn-danger"  v-on:click="deleteEvent(event.id)" >削除
+              <button class="btn btn-danger"  v-on:click="deleteEvent(event_id)" >削除
               </button>
             </td>
 		      </tr>
@@ -113,9 +113,9 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
       console.log("test start")
       console.log(event_id)
       console.log("end")
-      const response = await axios.delete('/api/'+ this.$route.params.id + event_id)
+      const response = await axios.delete('/'+this.$route.params.id+'/events/'+event_id)
       this.events.splice(this.index, 1)
-      this.reload();
+      //this.reload();
       },
     edit: function() {
         this.$set = false

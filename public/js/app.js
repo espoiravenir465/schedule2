@@ -2501,14 +2501,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log(event_id);
                 console.log("end");
                 _context4.next = 5;
-                return axios["delete"]('/api/' + this.$route.params.id + event_id);
+                return axios["delete"]('/' + this.$route.params.id + '/events/' + event_id);
 
               case 5:
                 response = _context4.sent;
-                this.events.splice(this.index, 1);
-                this.reload();
+                this.events.splice(this.index, 1); //this.reload();
 
-              case 8:
+              case 7:
               case "end":
                 return _context4.stop();
             }
@@ -37892,7 +37891,6 @@ var render = function() {
                     ? _c(
                         "div",
                         {
-                          domProps: { textContent: _vm._s(event.event_start) },
                           on: {
                             click: function($event) {
                               return _vm.$set(event, "start_edit", true)
@@ -37935,7 +37933,6 @@ var render = function() {
                     ? _c(
                         "div",
                         {
-                          domProps: { textContent: _vm._s(event.event_end) },
                           on: {
                             click: function($event) {
                               return _vm.$set(event, "end_edit", true)
@@ -38036,7 +38033,7 @@ var render = function() {
                       staticClass: "btn btn-danger",
                       on: {
                         click: function($event) {
-                          return _vm.deleteEvent(event.id)
+                          return _vm.deleteEvent(event_id)
                         }
                       }
                     },
