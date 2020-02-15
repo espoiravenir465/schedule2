@@ -43,7 +43,7 @@
               </router-link>
             </td>
 			      <td align = "center" valign ="middle" >
-              <button class="btn btn-danger"  v-on:click="deleteEvent(event_id)" >削除
+              <button class="btn btn-danger"  v-on:click="deleteEvent(event.event_id)" >削除
               </button>
             </td>
 		      </tr>
@@ -107,15 +107,18 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
        console.log("test")
       },
 	  reload() {
+        console.log("reload")
         this.$router.go({path: this.$router.currentRoute.path, force: true});
       },
     async deleteEvent(event_id){
       console.log("test start")
       console.log(event_id)
       console.log("end")
-      const response = await axios.delete('/'+this.$route.params.id+'/events/'+event_id)
+      console.log(this.$route.params.id)
+      console.log(event_id)
+      const response = await axios.delete('/api/'+this.$route.params.id + '/events/' + event_id+ '/',event_id)
       this.events.splice(this.index, 1)
-      //this.reload();
+      this.reload();
       },
     edit: function() {
         this.$set = false
@@ -123,6 +126,7 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
        },
 
     async editEvent (events) {
+       console.log("editEvent")
        const reponse =await axios.patch('/api/'+ this.$route.params.id, this.events)
        this.reload();
        },

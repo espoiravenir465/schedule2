@@ -45,11 +45,12 @@ class EventController extends Controller
     $new_event = Event::where('event_id', $event->event_id)->first();
     return response($new_event, 201);
   }
-  public function deleteEvent(Request $request)
+  public function destroy(Request $request)
   {
     \Log::info("delete");
-    \Log::info($request);
-    $event = Event::where('event_id', $request->event_id)->delete();
+    \Log::info($request->id);
+    \Log::info($request->schedule_id);
+    $event = Event::where('event_id', $request->id)->delete();
     $events = Event::all();
     return $events;
   }

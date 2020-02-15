@@ -43,7 +43,7 @@ Route::get('/{schedule_id}/{event_id}', 'EventController@Eventdetailindex')->nam
 //イベント作成
 Route::post('/event/{id}', 'EventController@createEvent')->name('event.create');
 //イベント削除
-Route::delete('/{schedule_id}/events/{id}', 'EventController@deleteEvent');
+Route::delete('/{schedule_id}/events/{id}', 'EventController@destroy');
 //イベント編集
 Route::patch('/{schedule_id}/events/{id}','EventController@editEvent');
 //写真一覧

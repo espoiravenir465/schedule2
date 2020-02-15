@@ -2483,6 +2483,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return fetchDateEvent;
     }(),
     reload: function reload() {
+      console.log("reload");
       this.$router.go({
         path: this.$router.currentRoute.path,
         force: true
@@ -2500,14 +2501,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log("test start");
                 console.log(event_id);
                 console.log("end");
-                _context4.next = 5;
-                return axios["delete"]('/' + this.$route.params.id + '/events/' + event_id);
-
-              case 5:
-                response = _context4.sent;
-                this.events.splice(this.index, 1); //this.reload();
+                console.log(this.$route.params.id);
+                console.log(event_id);
+                _context4.next = 7;
+                return axios["delete"]('/api/' + this.$route.params.id + '/events/' + event_id + '/', event_id);
 
               case 7:
+                response = _context4.sent;
+                this.events.splice(this.index, 1);
+                this.reload();
+
+              case 10:
               case "end":
                 return _context4.stop();
             }
@@ -2536,14 +2540,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _context5.next = 2;
+                console.log("editEvent");
+                _context5.next = 3;
                 return axios.patch('/api/' + this.$route.params.id, this.events);
 
-              case 2:
+              case 3:
                 reponse = _context5.sent;
                 this.reload();
 
-              case 4:
+              case 5:
               case "end":
                 return _context5.stop();
             }
@@ -38033,7 +38038,7 @@ var render = function() {
                       staticClass: "btn btn-danger",
                       on: {
                         click: function($event) {
-                          return _vm.deleteEvent(event_id)
+                          return _vm.deleteEvent(event.event_id)
                         }
                       }
                     },
