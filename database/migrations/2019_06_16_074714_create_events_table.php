@@ -26,10 +26,16 @@ class CreateEventsTable extends Migration
             $table->time('event_start');
             //イベント終了時間('event_end')/TIME
             $table->time('event_end');
+            //イベント名編集
+            $table->string('edit_title')->default(false);
+            //イベント開始時間編集
+            $table->string('edit_start')->default(false);
+            //イベント終了編集
+            $table->string('edit_end')->default(false);
             //登録日時 (created_at)/TIMESTAMP
             $table->timestamps();
-            
-            
+
+
             //外部キー
             $table->engine = 'InnoDB';
              $table->foreign('schedule_id')

@@ -36,6 +36,9 @@ class EventController extends Controller
     $event->event_date=$request->get('event_date');
     $event->event_start=$request->get('event_start');
     $event->event_end=$request->get('event_end');
+    $event->edit_title = false;
+    $event->edit_start = false;
+    $event->edit_end = false;
     \Log::info($event);
     \Log::info("test1");
     //\Log::info($schedule);
@@ -56,15 +59,14 @@ class EventController extends Controller
   }
   public function editEvent(Request $request)
   {
-    \Log::info("edit");
-    //\Log::info($request->all());
+    //\Log::info("edit");
+    \Log::info($request->all());
     $events = $request->all();
     foreach ($events as $event)
     {
-      \Log::info($event);
-      \Log::info($event['event_title']);
-      Event::where('id', $event['id'])->update(['event_title' => $event['event_title']],['event_start' => $event['event_start']],['event_end' => $event['event_end']]);
-    }
+      //\Log::info($event);
+      Event::where('event_id', $event['event_id'])->update(['event_title' => $event['event_title']],['event_start' => $event['event_start']],['event_end' => $event['event_end']]);
+     }
   }
   public function Eventdetailindex(Request $request)
   {

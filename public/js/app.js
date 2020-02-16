@@ -2542,7 +2542,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 console.log("editEvent");
                 _context5.next = 3;
-                return axios.patch('/api/' + this.$route.params.id, this.events);
+                return axios.patch('/api/' + this.$route.params.id + '/events', this.events);
 
               case 3:
                 reponse = _context5.sent;
@@ -37912,12 +37912,12 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: event.start,
-                            expression: "event.start"
+                            value: event.event_start,
+                            expression: "event.event_start"
                           }
                         ],
                         attrs: { type: "time" },
-                        domProps: { value: event.start },
+                        domProps: { value: event.event_start },
                         on: {
                           blur: function($event) {
                             return _vm.$set(event, "start_edit", false)
@@ -37926,7 +37926,7 @@ var render = function() {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(event, "start", $event.target.value)
+                            _vm.$set(event, "event_start", $event.target.value)
                           }
                         }
                       })
@@ -37954,12 +37954,12 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: event.end,
-                            expression: "event.end"
+                            value: event.event_end,
+                            expression: "event.event_end"
                           }
                         ],
                         attrs: { type: "time" },
-                        domProps: { value: event.end },
+                        domProps: { value: event.event_end },
                         on: {
                           blur: function($event) {
                             return _vm.$set(event, "end_edit", false)
@@ -37968,7 +37968,7 @@ var render = function() {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(event, "end", $event.target.value)
+                            _vm.$set(event, "event_end", $event.target.value)
                           }
                         }
                       })
@@ -37977,14 +37977,17 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", { attrs: { align: "center", valign: "middle" } }, [
                   !event.title_edit
-                    ? _c("div", {
-                        domProps: { textContent: _vm._s(event.event_title) },
-                        on: {
-                          click: function($event) {
-                            return _vm.$set(event, "title_edit", true)
+                    ? _c(
+                        "div",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.$set(event, "title_edit", true)
+                            }
                           }
-                        }
-                      })
+                        },
+                        [_vm._v(_vm._s(event.event_title))]
+                      )
                     : _vm._e(),
                   _vm._v(" "),
                   event.title_edit
@@ -37993,12 +37996,12 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: event.title,
-                            expression: "event.title"
+                            value: event.event_title,
+                            expression: "event.event_title"
                           }
                         ],
                         attrs: { type: "text" },
-                        domProps: { value: event.title },
+                        domProps: { value: event.event_title },
                         on: {
                           blur: function($event) {
                             return _vm.$set(event, "title_edit", false)
@@ -38007,7 +38010,7 @@ var render = function() {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(event, "title", $event.target.value)
+                            _vm.$set(event, "event_title", $event.target.value)
                           }
                         }
                       })

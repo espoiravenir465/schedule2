@@ -26,17 +26,17 @@
 	      <tbody>
 		      <tr v-for="(event,event_id) in events" :key="event_id">
 		        <td align = "center" valign ="middle">
-            <div v-if="!event.start_edit"  v-on:click="$set(event, 'start_edit', true)">{{event.event_start.slice(0,5)}}</div>
-              <input v-if="event.start_edit" type="time" v-model="event.start" v-on:blur="$set(event, 'start_edit', false)"  >
-			      </td>
+             <div v-if="!event.start_edit"  v-on:click="$set(event, 'start_edit', true)">{{event.event_start.slice(0,5)}}</div>
+             <input v-if="event.start_edit" type="time" v-model="event.event_start" v-on:blur="$set(event, 'start_edit', false)"  >
+            </td>
 			      <td align = "center" valign ="middle">
 			        <div v-if="!event.end_edit"  v-on:click="$set(event, 'end_edit', true)">{{event.event_end.slice(0,5)}}</div>
-              <input v-if="event.end_edit" type="time" v-model="event.end" v-on:blur="$set(event, 'end_edit', false)"  >
-			      </td>
+              <input v-if="event.end_edit" type="time" v-model="event.event_end" v-on:blur="$set(event, 'end_edit', false)"  >
+            </td>
 			      <td align = "center" valign ="middle">
-			        <div v-if="!event.title_edit" v-text="event.event_title" v-on:click="$set(event, 'title_edit', true)"></div>
-              <input v-if="event.title_edit" type="text" v-model="event.title" v-on:blur="$set(event, 'title_edit', false)"  >
-			      </td>
+            <div v-if="!event.title_edit" v-on:click="$set(event, 'title_edit', true)">{{event.event_title}}</div>
+              <input v-if="event.title_edit" type="text" v-model="event.event_title" v-on:blur="$set(event, 'title_edit', false)"  >
+            </td>
 			      <td align = "center" valign ="middle" >
               <router-link :to="`/${schedule_id}/${event_id}`">
                 <button class="btn btn-primary">詳細</button>
@@ -127,7 +127,7 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
 
     async editEvent (events) {
        console.log("editEvent")
-       const reponse =await axios.patch('/api/'+ this.$route.params.id, this.events)
+       const reponse =await axios.patch('/api/'+ this.$route.params.id + '/events', this.events)
        this.reload();
        },
 
