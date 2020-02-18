@@ -65,13 +65,16 @@ class EventController extends Controller
     foreach ($events as $event)
     {
       //\Log::info($event);
-      Event::where('event_id', $event['event_id'])->update(['event_title' => $event['event_title']],['event_start' => $event['event_start']],['event_end' => $event['event_end']]);
+      //Event::where('event_id', $event['event_id'])->update(['event_title' => $event['event_title']],['event_start' => $event['event_start']],['event_end' => $event['event_end']]);
+      Event::where('event_id', $event['event_id'])->update(['event_title' => $event['event_title']]);
+      Event::where('event_id', $event['event_id'])->update(['event_start' => $event['event_start']]);
+      Event::where('event_id', $event['event_id'])->update(['event_end' => $event['event_end']]);
      }
   }
   public function Eventdetailindex(Request $request)
   {
     \Log::info($request->id);
-    $events = Event::where('schedule_id', $request->id)->where('event_tite', $request->title)->orderBy(Event::CREATED_AT, 'desc')->paginate();
+    $events = Event::where('schedule_id', $request->id)->where('event_title', $request->title)->orderBy(Event::CREATED_AT, 'desc')->paginate();
     return $events;
       }
 
