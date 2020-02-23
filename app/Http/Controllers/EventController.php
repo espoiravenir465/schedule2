@@ -73,10 +73,13 @@ class EventController extends Controller
   }
   public function Eventdetailindex(Request $request)
   {
-    \Log::info($request->id);
-    $events = Event::where('schedule_id', $request->id)->where('event_title', $request->title)->orderBy(Event::CREATED_AT, 'desc')->paginate();
-    return $events;
-      }
+    \Log::info('Eventdetailindex');
+    \Log::info($request);
+    $event = Event::where('event_id', $request->get('id'))->get();
+    \Log::info($event);
+    \Log::info('testend');
+    return $event;
+  }
 
   public function createComment(Event $event, Request $request)
       {

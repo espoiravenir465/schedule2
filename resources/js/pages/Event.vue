@@ -38,7 +38,7 @@
               <input v-if="event.title_edit" type="text" v-model="event.event_title" v-on:blur="$set(event, 'title_edit', false)"  >
             </td>
 			      <td align = "center" valign ="middle" >
-              <router-link :to="`/${schedule_id}/${event_id}`">
+               <router-link :to="`/${schedule_id}/${event.event_id}`">
                 <button class="btn btn-primary">詳細</button>
               </router-link>
             </td>

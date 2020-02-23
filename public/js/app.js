@@ -2681,14 +2681,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      events: [],
+      event_id: 0,
+      event: [],
       comments: [],
       comment_id: 0
     };
   },
   methods: {
-    fetchEventdetail: function () {
-      var _fetchEventdetail = _asyncToGenerator(
+    fetchEvent: function () {
+      var _fetchEvent = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -2696,16 +2697,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log('testfetch');
-                _context.next = 3;
-                return axios.get('/api/' + this.$route.params.id + '/events?id=' + this.$route.params.id);
+                console.log('fetchevent');
+                console.log(this.$route.params);
+                _context.next = 4;
+                return axios.get('/api/event/' + this.$route.params.id + '/' + this.$route.params.event_id + '?id=' + this.$route.params.event_id);
 
-              case 3:
+              case 4:
                 response = _context.sent;
-                this.event = response.data.data;
-                console.log(response);
+                this.event = response.data[0];
+                console.log(this.event);
 
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -2713,11 +2715,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this);
       }));
 
-      function fetchEventdetail() {
-        return _fetchEventdetail.apply(this, arguments);
+      function fetchEvent() {
+        return _fetchEvent.apply(this, arguments);
       }
 
-      return fetchEventdetail;
+      return fetchEvent;
     }(),
     fetchComments: function () {
       var _fetchComments = _asyncToGenerator(
@@ -2751,6 +2753,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchComments;
     }()
+  },
+  watch: {
+    $route: {
+      handler: function () {
+        var _handler = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.next = 2;
+                  return this.fetchEvent();
+
+                case 2:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3, this);
+        }));
+
+        function handler() {
+          return _handler.apply(this, arguments);
+        }
+
+        return handler;
+      }(),
+      immediate: true
+    }
   }
 });
 
@@ -38023,7 +38055,11 @@ var render = function() {
                   [
                     _c(
                       "router-link",
-                      { attrs: { to: "/" + _vm.schedule_id + "/" + event_id } },
+                      {
+                        attrs: {
+                          to: "/" + _vm.schedule_id + "/" + event.event_id
+                        }
+                      },
                       [
                         _c("button", { staticClass: "btn btn-primary" }, [
                           _vm._v("詳細")
@@ -38119,7 +38155,27 @@ var render = function() {
       "div",
       { staticClass: "event-detail" },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "card mb-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("h5", { staticClass: "card-header" }, [
+              _vm._v(_vm._s(_vm.event.event_date))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("h5", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(_vm.event.event_title))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v(
+                  _vm._s(_vm.event.event_start.slice(0, 5)) +
+                    "〜" +
+                    _vm._s(_vm.event.event_end.slice(0, 5))
+                )
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("PhotoForm"),
         _vm._v(" "),
@@ -38128,7 +38184,7 @@ var render = function() {
         _c("CommentForm"),
         _vm._v(" "),
         _c("table", { staticClass: "table bordered break-all" }, [
-          _vm._m(1),
+          _vm._m(0),
           _vm._v(" "),
           _c(
             "tbody",
@@ -38213,24 +38269,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card mb-3" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("h5", { staticClass: "card-header" }, [_vm._v("イベント日付")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("h5", { staticClass: "card-title" }, [_vm._v("イベントタイトル")]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("イベント開始時間〜イベント終了時間")
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

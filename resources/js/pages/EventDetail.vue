@@ -3,10 +3,10 @@
 <div class="event-detail">
 <div class="card mb-3">
 <div class="card">
-<h5 class="card-header">イベント日付</h5>
+<h5 class="card-header">{{event.event_date}}</h5>
   <div class="card-body">
-    <h5 class="card-title">イベントタイトル</h5>
-    <p class="card-text">イベント開始時間〜イベント終了時間</p>
+  <h5 class="card-title">{{event.event_title}}</h5>
+  <p class="card-text">{{event.event_start.slice(0,5)}}〜{{event.event_end.slice(0,5)}}</p>
   </div>
 </div>
 </div>
@@ -52,18 +52,20 @@ components: {
  },
  data () {
   return {
-      events: [],
+      event_id: 0,
+      event: [],
       comments:[],
       comment_id:0,
       }
 },
 
 methods:{
-    async fetchEventdetail (){
-      console.log('testfetch')
-      const response = await axios.get('/api/'+ this.$route.params.id +'/events?id=' + this.$route.params.id)
-      this.event= response.data.data
-      console.log(response)
+    async fetchEvent (){
+      console.log('fetchevent')
+      console.log(this.$route.params)
+      const response = await axios.get('/api/event/'+ this.$route.params.id + '/'+ this.$route.params.event_id+'?id=' + this.$route.params.event_id )
+      this.event= response.data[0]
+      console.log(this.event)
     },
     async fetchComments (){
       console.log('testfetchcomments')
@@ -71,7 +73,15 @@ methods:{
       this.comments = response.data.data
       console.log(response)
     },
-}
+  },
+  watch: {
+      $route: {
+       async handler () {
+       await this.fetchEvent()
+        },
+       immediate: true
+        }
+      }
 }
 
 

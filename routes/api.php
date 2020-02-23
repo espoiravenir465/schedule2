@@ -39,7 +39,7 @@ Route::get('/{schedule_id}/events', 'EventController@index')->name('event.index'
 //日付ごとのイベント一覧
 Route::get('/{schedule_id}/events/{date}', 'EventController@dateindex')->name('event.dateindex');
 //イベント詳細
-Route::get('/{schedule_id}/{event_id}', 'EventController@Eventdetailindex')->name('event.detail');
+Route::get('/event/{schedule_id}/{event_id}', 'EventController@Eventdetailindex')->name('event.detail');
 //イベント作成
 Route::post('/event/{id}', 'EventController@createEvent')->name('event.create');
 //イベント削除
