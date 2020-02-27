@@ -1790,6 +1790,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1813,17 +1815,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                console.log('createComment');
                 formData = new FormData();
+                formData.append('event_id', this.$route.params.event_id);
                 formData.append('comment', this.comment);
-                _context.next = 4;
-                return axios.post('/api/{schedule_id}/{event_id}/comments', formData);
+                _context.next = 6;
+                return axios.post('/api/' + this.$route.params.event_id + '/comments', formData);
 
-              case 4:
+              case 6:
                 response = _context.sent;
-                this.$router.push('/{schedule_id}/{event_id}/comments');
                 this.reload();
 
-              case 7:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -2732,14 +2735,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 console.log('testfetchcomments');
                 _context2.next = 3;
-                return axios.get('/api/' + this.$route.params.id + '/events?id=' + this.$route.params.id);
+                return axios.get('/api/' + this.$route.params.id + '/comments?id=' + this.$route.params.id);
 
               case 3:
                 response = _context2.sent;
                 this.comments = response.data.data;
+                console.log('start');
+                console.log(this.comments);
+                console.log('end');
                 console.log(response);
 
-              case 6:
+              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -2768,6 +2774,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return this.fetchEvent();
 
                 case 2:
+                  _context3.next = 4;
+                  return this.fetchComments();
+
+                case 4:
                 case "end":
                   return _context3.stop();
               }
@@ -37303,29 +37313,43 @@ var render = function() {
         _c("h5", { staticClass: "card-header" }, [_vm._v("コメント入力")]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.comment,
-                expression: "comment"
-              }
-            ],
-            staticClass: "form-control form-control-lg col-sm-10",
-            attrs: { type: "text", placeholder: "コメント入力" },
-            domProps: { value: _vm.comment },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c(
+            "form",
+            {
+              staticClass: "form",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.createComment($event)
                 }
-                _vm.comment = $event.target.value
               }
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(0)
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.comment,
+                    expression: "comment"
+                  }
+                ],
+                staticClass: "form-control form-control-lg col-sm-10",
+                attrs: { type: "text", placeholder: "コメント入力" },
+                domProps: { value: _vm.comment },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.comment = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          )
         ])
       ])
     ])
@@ -38166,13 +38190,15 @@ var render = function() {
                 _vm._v(_vm._s(_vm.event.event_title))
               ]),
               _vm._v(" "),
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v(
-                  _vm._s(_vm.event.event_start.slice(0, 5)) +
-                    "〜" +
-                    _vm._s(_vm.event.event_end.slice(0, 5))
-                )
-              ])
+              _vm.event.event_start && _vm.event.event_start
+                ? _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      _vm._s(_vm.event.event_start.slice(0, 5)) +
+                        "〜" +
+                        _vm._s(_vm.event.event_end.slice(0, 5))
+                    )
+                  ])
+                : _vm._e()
             ])
           ])
         ]),
@@ -38188,21 +38214,25 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.comments, function(comment, id) {
-              return _c("tr", { key: _vm.comment_id }, [
+            _vm._l(_vm.comments, function(comment, comment_id) {
+              return _c("tr", { key: comment_id }, [
                 _c("td", { attrs: { align: "center", valign: "middle" } }, [
-                  !_vm.commnet_edit
+                  !comment.comment_edit
                     ? _c("div", {
                         domProps: { textContent: _vm._s(comment.comment) },
                         on: {
                           click: function($event) {
-                            return _vm.$set(comment, "comment_edit", true)
+                            return _vm.$set(
+                              comment,
+                              "comment.comment_edit",
+                              true
+                            )
                           }
                         }
                       })
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.comment_edit
+                  comment.comment_edit
                     ? _c("input", {
                         directives: [
                           {
@@ -55990,7 +56020,7 @@ var actions = {
             case 3:
               response = _context.sent;
 
-              if (!(response.status === CREATED)) {
+              if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
                 _context.next = 8;
                 break;
               }

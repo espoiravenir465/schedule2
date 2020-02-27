@@ -1,4 +1,4 @@
-import { OK, UNPROCESSABLE_ENTITY } from '../util'
+import { CREATED,OK, UNPROCESSABLE_ENTITY } from '../util'
 
 const state = {
     user:null,

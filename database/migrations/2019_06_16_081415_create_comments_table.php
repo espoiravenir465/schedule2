@@ -20,9 +20,11 @@ class CreateCommentsTable extends Migration
             $table->integer('event_id')->unsigned();
             //コメント(comment)/TEXT
              $table->text('comment');
+            //コメント編集
+            $table->string('comment_edit')->default(false);
             //登録日時
             $table->timestamps();
-            
+
             //外部キー
              $table->engine = 'InnoDB';
              $table->foreign('event_id')

@@ -6,7 +6,7 @@
 <h5 class="card-header">{{event.event_date}}</h5>
   <div class="card-body">
   <h5 class="card-title">{{event.event_title}}</h5>
-  <p class="card-text">{{event.event_start.slice(0,5)}}〜{{event.event_end.slice(0,5)}}</p>
+  <p class="card-text" v-if="event.event_start && event.event_start">{{event.event_start.slice(0,5)}}〜{{event.event_end.slice(0,5)}}</p>
   </div>
 </div>
 </div>
@@ -21,17 +21,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="(comment,id) in comments" :key="comment_id">
+    <tr v-for="(comment,comment_id) in comments" :key="comment_id">
       <td align = "center" valign ="middle">
-        <div v-if="!commnet_edit" v-text="comment.comment" v-on:click="$set(comment, 'comment_edit', true)"></div>
-        <input v-if="comment_edit" type="text" v-model="comment.comment" v-on:blur="$set(comment, 'comment', false)" >
+      <div v-if="!comment.comment_edit" v-text="comment.comment" v-on:click="$set(comment, 'comment.comment_edit', true)"></div>
+      <input v-if="comment.comment_edit" type="text" v-model="comment.comment" v-on:blur="$set(comment, 'comment', false)" >
       </td>
       <td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteComment(comment.id)">削除</button></td>
       </tr>
     </tbody>
   </table>
   <div class="save-button">
-    <button class="btn btn-success" v-on:click="editComment(comments)">保存</button>
+  <button class="btn btn-success" v-on:click="editComment(comments)">保存</button>
   </div>
 </div>
 </div>
@@ -69,15 +69,19 @@ methods:{
     },
     async fetchComments (){
       console.log('testfetchcomments')
-      const response = await axios.get('/api/'+ this.$route.params.id +'/events?id=' + this.$route.params.id)
+      const response = await axios.get('/api/'+ this.$route.params.id +'/comments?id=' + this.$route.params.id)
       this.comments = response.data.data
+      console.log('start')
+      console.log(this.comments)
+      console.log('end')
       console.log(response)
     },
   },
   watch: {
       $route: {
        async handler () {
-       await this.fetchEvent()
+       await this.fetchEvent(),
+       await this.fetchComments()
         },
        immediate: true
         }

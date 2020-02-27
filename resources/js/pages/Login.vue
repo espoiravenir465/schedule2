@@ -43,7 +43,7 @@
           <ul v-if="registerErrors.password">
             <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
           </ul>
-        </div> 
+        </div>
        <label for="username">Name</label>
        <input type="text" class="form__item" id="username" v-model="registerForm.name">
        <label for="email">Email</label>
@@ -91,7 +91,7 @@ export default {
     async login () {
     // authストアのloginアクションを呼び出す
     await this.$store.dispatch('auth/login', this.loginForm)
-    
+
     if (this.apiStatus) {
     // スケジュールに移動する
     this.$router.push('/schedule')
@@ -100,8 +100,8 @@ export default {
     async register () {
     // authストアのresigterアクションを呼び出す
     await this.$store.dispatch('auth/register', this.registerForm)
-    
-     if (this.apiStatus) {
+
+    if (this.apiStatus) {
     // スケジュールに移動する
     this.$router.push('/schedule')
     }

@@ -55,10 +55,10 @@ Route::get('{schedule_id}/{event_id}/{photo_id}','PhotoController@Photodetail');
 //写真削除
 Route::delete('/{schedule_id}/{event_id}/{photo_id}','PhotoController@deletePhoto');
 //コメント表示
-Route::get('/{schedule_id}/{event_id}/comments','EventController@Commentindex');
+Route::get('/{event_id}/comments','CommentController@index');
 //コメント投稿
-Route::post('{schedule_id}/{event_id}/comments','EventController@createComment');
+Route::post('{event_id}/comments','CommentController@createComment');
 //コメント編集
-Route::patch('/{schedule_id}/{event_id}/{comment_id}','EventController@editComment');
+Route::patch('/{event_id}/{comment_id}','CommentController@editComment');
 //コメント削除
-Route::delete('/{schedule_id}/{event_id}/{comment_id}','EventController@deleteComment');
+Route::delete('/{event_id}/{comment_id}','CommentController@deleteComment');
