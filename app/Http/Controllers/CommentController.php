@@ -29,4 +29,23 @@ class CommentController extends Controller
     $new_comment= Comment::where('comment_id', $comment->comment_id)->first();
     return response($new_comment, 201);
   }
+  public function deleteComment(Request $request)
+  {
+    \Log::info("deleteComment");
+    \Log::info($request->event_id);
+    \Log::info($request->comment_id);
+    $comment = Comment::where('comment_id', $request->comment_id)->delete();
+    $comments = Comment::where('event_id', $request->event_id)->orderBy(Comment::CREATED_AT, 'desc')->paginate();
+    return $comments;
+  }
+  public function editComment(Request $request)
+  {
+   \Log::info($request->all());
+    $comments = $request->all();
+    foreach ($comments as $comment)
+    {
+      Comment::where('comment_id', $comment['comment_id'])->update(['comment' => $comment['comment']]);
+    }
+  }
+
 }

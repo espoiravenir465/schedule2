@@ -7,7 +7,7 @@
           <form class="form" @submit.prevent="createComment">
             <input class="form-control form-control-lg col-sm-10" type="text" placeholder="コメント入力"　v-model="comment">
             <div class="btn-submit">
-              <button class="btn btn-primary" type="submit">保存</button>
+              <button class="btn btn-success" type="submit">保存</button>
             </div>
           </form>
         </div>

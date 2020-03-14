@@ -2108,6 +2108,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2758,31 +2763,107 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return fetchComments;
-    }()
+    }(),
+    deleteComment: function () {
+      var _deleteComment = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(comment_id) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                console.log('deleteComment');
+                console.log(comment_id);
+                _context3.next = 4;
+                return axios["delete"]('/api/comment/' + this.$route.params.id + '/' + comment_id + '?event_id=' + this.$route.params.id + '/' + comment_id);
+
+              case 4:
+                response = _context3.sent;
+                this.comments = response.data.data;
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function deleteComment(_x) {
+        return _deleteComment.apply(this, arguments);
+      }
+
+      return deleteComment;
+    }(),
+    editComment: function () {
+      var _editComment = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(comments) {
+        var reponse;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                console.log("editComment");
+                _context4.next = 3;
+                return axios.patch('/api/comment/' + this.$route.params.id, this.comments);
+
+              case 3:
+                reponse = _context4.sent;
+                this.reload();
+
+              case 5:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function editComment(_x2) {
+        return _editComment.apply(this, arguments);
+      }
+
+      return editComment;
+    }(),
+    reload: function reload() {
+      console.log("reload");
+      this.$router.go({
+        path: this.$router.currentRoute.path,
+        force: true
+      });
+    },
+    edit: function edit() {
+      this.$set = false;
+      this.$nextTick(function () {
+        this.$refs.r1.focus();
+      });
+    }
   },
   watch: {
     $route: {
       handler: function () {
         var _handler = _asyncToGenerator(
         /*#__PURE__*/
-        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context5.prev = _context5.next) {
                 case 0:
-                  _context3.next = 2;
+                  _context5.next = 2;
                   return this.fetchEvent();
 
                 case 2:
-                  _context3.next = 4;
+                  _context5.next = 4;
                   return this.fetchComments();
 
                 case 4:
                 case "end":
-                  return _context3.stop();
+                  return _context5.stop();
               }
             }
-          }, _callee3, this);
+          }, _callee5, this);
         }));
 
         function handler() {
@@ -37363,7 +37444,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "btn-submit" }, [
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
         [_vm._v("保存")]
       )
     ])
@@ -37674,33 +37755,67 @@ var render = function() {
   return _c("div", { staticClass: "photo-form" }, [
     _c("div", { staticClass: "card", staticStyle: { width: "20rem" } }, [
       _c("div", { staticClass: "card-body" }, [
-        _c("h4", { staticClass: "card-title" }, [
-          _vm._v("写真を選んでください。")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "file", accept: "image/*" },
-          on: {
-            change: function($event) {
-              return _vm.onFileChange($event)
+        _c(
+          "form",
+          {
+            staticClass: "form",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.createPhoto($event)
+              }
             }
-          }
-        }),
-        _vm._v(" "),
-        _vm.imageData ? _c("img", { attrs: { src: _vm.imageData } }) : _vm._e(),
-        _vm._v(" "),
-        _vm.imageData
-          ? _c(
-              "button",
-              { staticClass: "btn btn-danger", on: { click: _vm.resetFile } },
-              [_vm._v("リセットする")]
-            )
-          : _vm._e()
+          },
+          [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("写真を選んでください。")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "file", accept: "image/*" },
+              on: {
+                change: function($event) {
+                  return _vm.onFileChange($event)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.imageData
+              ? _c("img", { attrs: { src: _vm.imageData } })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.imageData
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    on: { click: _vm.resetFile }
+                  },
+                  [_vm._v("リセットする")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._m(0)
+          ]
+        )
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn-submit" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("保存")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38222,11 +38337,7 @@ var render = function() {
                         domProps: { textContent: _vm._s(comment.comment) },
                         on: {
                           click: function($event) {
-                            return _vm.$set(
-                              comment,
-                              "comment.comment_edit",
-                              true
-                            )
+                            return _vm.$set(comment, "comment_edit", true)
                           }
                         }
                       })
@@ -38246,7 +38357,7 @@ var render = function() {
                         domProps: { value: comment.comment },
                         on: {
                           blur: function($event) {
-                            return _vm.$set(comment, "comment", false)
+                            return _vm.$set(comment, "comment_edit", false)
                           },
                           input: function($event) {
                             if ($event.target.composing) {
@@ -38266,7 +38377,7 @@ var render = function() {
                       staticClass: "btn btn-danger",
                       on: {
                         click: function($event) {
-                          return _vm.deleteComment(comment.id)
+                          return _vm.deleteComment(comment.comment_id)
                         }
                       }
                     },

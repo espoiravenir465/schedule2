@@ -22,11 +22,11 @@
     </thead>
     <tbody>
     <tr v-for="(comment,comment_id) in comments" :key="comment_id">
-      <td align = "center" valign ="middle">
-      <div v-if="!comment.comment_edit" v-text="comment.comment" v-on:click="$set(comment, 'comment.comment_edit', true)"></div>
-      <input v-if="comment.comment_edit" type="text" v-model="comment.comment" v-on:blur="$set(comment, 'comment', false)" >
-      </td>
-      <td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteComment(comment.id)">削除</button></td>
+        <td align = "center" valign ="middle">
+          <div v-if="!comment.comment_edit" v-text="comment.comment" v-on:click="$set(comment, 'comment_edit', true)"></div>
+          <input v-if="comment.comment_edit" type="text" v-model="comment.comment" v-on:blur="$set(comment, 'comment_edit', false)" >
+        </td>
+        <td align = "center" valign ="middle" ><button class="btn btn-danger"  v-on:click="deleteComment(comment.comment_id)">削除</button></td>
       </tr>
     </tbody>
   </table>
@@ -75,6 +75,25 @@ methods:{
       console.log(this.comments)
       console.log('end')
       console.log(response)
+    },
+    async deleteComment (comment_id){
+      console.log('deleteComment')
+      console.log(comment_id)
+      const response = await axios.delete('/api/comment/'+ this.$route.params.id + '/'+ comment_id+'?event_id=' + this.$route.params.id + '/'+ comment_id )
+      this.comments = response.data.data
+    },
+    async editComment (comments) {
+      console.log("editComment")
+      const reponse =await axios.patch('/api/comment/'+ this.$route.params.id , this.comments)
+      this.reload();
+    },
+    reload() {
+      console.log("reload")
+      this.$router.go({path: this.$router.currentRoute.path, force: true});
+    },
+    edit: function() {
+      this.$set = false
+      this.$nextTick(function () { this.$refs.r1.focus() })
     },
   },
   watch: {
