@@ -2,11 +2,11 @@
 <div class="photo-form">
 <div class="card" style="width: 20rem;">
     <div class="card-body">
-    <form class="form" @submit.prevent="createPhoto">
+    <form class="form" method="post" enctype="multipart/form-data" @submit.prevent="submit">
         <h4 class="card-title">写真を選んでください。</h4>
         <input type="file" accept="image/*" @change="onFileChange($event)">
         <img :src="imageData" v-if="imageData">
-        <button class="btn btn-danger" v-if="imageData" @click="resetFile">リセットする</button>
+        <button class="btn btn-danger" v-if="imageData" @click="reset">リセットする</button>
         <div class="btn-submit">
         <button class="btn btn-success" type="submit">保存</button>
         </div>
@@ -37,15 +37,19 @@ data () {
     reader.readAsDataURL(file);
    }
   },
-        resetFile() {
-                    const input = this.$refs.file;
-                    input.type = 'text';
-                    input.type = 'file';
-                    this.imageData = '';
-                }
-        }
+  reset() {
+      //const input = this.$refs.file;
+      //input.type = 'text';
+      //input.type = 'file';
+      this.imageData = '';
+    },
+    async submit () {
+      const formData = new FormData()
+      formData.append('imageData', this.imageData)
+      const response = await axios.post('/api/photos/' + this.$route.params.event_id, formData)
+      //this.reset()
+      //this.$emit('input', false)
     }
-
-
-
+  }
+}
 </script>

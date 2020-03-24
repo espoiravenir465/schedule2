@@ -26,6 +26,29 @@ class PhotoController extends Controller
 
     return $photos;
     }
+    /**
+        * 写真投稿
+        * @param StorePhoto $request
+        * @return \Illuminate\Http\Response
+        */
+       public function create(StorePhoto $request)
+       {
+           $photo = new Photo();
+           list(, $fileData) = explode(';', $request->imageData);
+           list(, $fileData) = explode(',', $fileData);
+           $fileData = base64_decode($fileData);
+           Storage::put('test.jpeg', $fileData);
 
-    
+           // データベースエラー時にファイル削除を行うため
+           // トランザクションを利用する
+           DB::beginTransaction();
+
+           try {
+           } catch (\Exception $exception) {
+           }
+
+           // リソースの新規作成なので
+           // レスポンスコードは201(CREATED)を返却する
+           return response($photo, 201);
+       }    
 }

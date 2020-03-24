@@ -47,9 +47,9 @@ Route::delete('/{schedule_id}/events/{id}', 'EventController@destroy');
 //イベント編集
 Route::patch('/{schedule_id}/events','EventController@editEvent');
 //写真一覧
-Route::get('/{schedule_id}/{event_id}/photos','PhotoController@Photoindex');
+Route::get('/photos/{event_id}','PhotoController@index');
 //写真投稿
-Route::post('/{schedule_id}/{event_id}/photos','PhotoController@createPhoto');
+Route::post('/photos/{event_id}','PhotoController@create')->name('photo.create');
 //写真詳細
 Route::get('/photo/{event_id}/{photo_id}','PhotoController@Photodetail');
 //写真削除

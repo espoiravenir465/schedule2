@@ -2094,7 +2094,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2137,12 +2145,43 @@ __webpack_require__.r(__webpack_exports__);
         reader.readAsDataURL(file);
       }
     },
-    resetFile: function resetFile() {
-      var input = this.$refs.file;
-      input.type = 'text';
-      input.type = 'file';
+    reset: function reset() {
+      //const input = this.$refs.file;
+      //input.type = 'text';
+      //input.type = 'file';
       this.imageData = '';
-    }
+    },
+    submit: function () {
+      var _submit = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var formData, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                formData = new FormData();
+                formData.append('imageData', this.imageData);
+                _context.next = 4;
+                return axios.post('/api/photos/' + this.$route.params.event_id, formData);
+
+              case 4:
+                response = _context.sent;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function submit() {
+        return _submit.apply(this, arguments);
+      }
+
+      return submit;
+    }()
   }
 });
 
@@ -37759,10 +37798,11 @@ var render = function() {
           "form",
           {
             staticClass: "form",
+            attrs: { method: "post", enctype: "multipart/form-data" },
             on: {
               submit: function($event) {
                 $event.preventDefault()
-                return _vm.createPhoto($event)
+                return _vm.submit($event)
               }
             }
           },
@@ -37787,10 +37827,7 @@ var render = function() {
             _vm.imageData
               ? _c(
                   "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    on: { click: _vm.resetFile }
-                  },
+                  { staticClass: "btn btn-danger", on: { click: _vm.reset } },
                   [_vm._v("リセットする")]
                 )
               : _vm._e(),
