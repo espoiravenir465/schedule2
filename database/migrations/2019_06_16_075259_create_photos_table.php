@@ -14,8 +14,8 @@ class CreatePhotosTable extends Migration
     public function up()
     {
         Schema::create('photos', function (Blueprint $table) {
-            //写真ID (photo_id)/INTEGER
-              $table->increments('photo_id')->unsigned();
+            //写真ID (id)/INTEGER
+              $table->string('id');
             //ファイル名(filename)/VARCHAR
               $table->string('filename');
             //イベントID(event_id)/INTEGER
@@ -25,7 +25,7 @@ class CreatePhotosTable extends Migration
             //登録日時 (created_at)/TIMESTAMP
               $table->timestamps();
 
-            
+
 
             //外部キー
              $table->engine = 'InnoDB';
@@ -36,7 +36,7 @@ class CreatePhotosTable extends Migration
              $table->foreign('user_id')
                   ->references('id')
                   ->on('users')
-                  ->onDelete('cascade');        
+                  ->onDelete('cascade');
         });
     }
 

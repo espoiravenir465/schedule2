@@ -2125,7 +2125,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      imageData: ''
+      imageData: '',
+      filename: ''
     };
   },
   methods: {
@@ -2140,6 +2141,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         reader.onload = function (e) {
           _this.imageData = e.target.result;
+          _this.filename = files[0].name;
         };
 
         reader.readAsDataURL(file);
@@ -2150,6 +2152,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       //input.type = 'text';
       //input.type = 'file';
       this.imageData = '';
+      this.filename = '';
     },
     submit: function () {
       var _submit = _asyncToGenerator(
@@ -2160,15 +2163,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                console.log(this.filename);
                 formData = new FormData();
                 formData.append('imageData', this.imageData);
-                _context.next = 4;
+                formData.append('extension', getExt(this.filename));
+                formData.append('eventId', this.$route.params.event_id);
+                _context.next = 7;
                 return axios.post('/api/photos/' + this.$route.params.event_id, formData);
 
-              case 4:
+              case 7:
                 response = _context.sent;
 
-              case 5:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -2181,9 +2187,78 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return submit;
+    }(),
+    fetchPhotos: function () {
+      var _fetchPhotos = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response, file;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('/api/photos?event_id=' + this.$route.params.event_id);
+
+              case 2:
+                response = _context2.sent;
+                //this.imageData = response.data
+                file = response.data;
+                this.imageData = file;
+                this.filename = 'test.jpeg';
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function fetchPhotos() {
+        return _fetchPhotos.apply(this, arguments);
+      }
+
+      return fetchPhotos;
     }()
+  },
+  watch: {
+    $route: {
+      handler: function () {
+        var _handler = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.next = 2;
+                  return this.fetchPhotos();
+
+                case 2:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3, this);
+        }));
+
+        function handler() {
+          return _handler.apply(this, arguments);
+        }
+
+        return handler;
+      }(),
+      immediate: true
+    }
   }
 });
+
+function getExt(filename) {
+  var pos = filename.lastIndexOf('.');
+  if (pos === -1) return '';
+  return filename.slice(pos + 1);
+}
 
 /***/ }),
 
@@ -37880,7 +37955,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "grid" },
-      _vm._l(_vm.photos, function(photo) {
+      _vm._l(_vm.photos, function(photo, photo_id) {
         return _c("Photo", {
           key: photo.id,
           staticClass: "grid__item",

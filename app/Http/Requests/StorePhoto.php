@@ -24,7 +24,7 @@ class StorePhoto extends FormRequest
     public function rules()
     {
         return [
-            'imageData' => 'required'
+            //'imageData' => 'required'
         ];
     }
 }
