@@ -7,20 +7,23 @@
         v-for="photo in photos"
         :key="photo.id"
         :item="photo"
-      />
+    />
     </div>
   </div>
 </template>
 
 <script>
-import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
-
+import { OK } from '../util'
+import Photo from '../components/Photo.vue'
 
 export default {
+components: {
+ Photo
+ },
   data () {
     return {
       photos: []
     }
-  }
-}
+  },
+  
 </script>

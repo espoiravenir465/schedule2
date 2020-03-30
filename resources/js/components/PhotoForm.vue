@@ -73,7 +73,7 @@ methods: {
       },
       immediate: true
     }
-  }
+}
 }
   function getExt(filename)
     {
@@ -81,4 +81,5 @@ methods: {
     if (pos === -1) return '';
     return filename.slice(pos + 1);
 }
+
 </script>
