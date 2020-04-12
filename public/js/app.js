@@ -2105,12 +2105,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
       type: Object,
-      required: true
+      required: false
     }
   }
 });
@@ -2180,11 +2179,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     reset: function reset() {
-      //const input = this.$refs.file;
-      //input.type = 'text';
-      //input.type = 'file';
       this.imageData = '';
       this.filename = '';
+    },
+    reload: function reload() {
+      this.$router.go({
+        path: this.$router.currentRoute.path,
+        force: true
+      });
     },
     submit: function () {
       var _submit = _asyncToGenerator(
@@ -2205,8 +2207,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 7:
                 response = _context.sent;
+                this.reload();
 
-              case 8:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -2219,71 +2222,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return submit;
-    }(),
-    fetchPhotos: function () {
-      var _fetchPhotos = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response, file;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.get('/api/photos?event_id=' + this.$route.params.event_id);
+    }() //,
+    //async fetchPhotos () {
+    //  const response = await axios.get('/api/photos?event_id=' + this.$route.params.event_id)
+    //  const file = response.data;
+    //  this.imageData = file;
+    //},
 
-              case 2:
-                response = _context2.sent;
-                //this.imageData = response.data
-                file = response.data;
-                this.imageData = file;
-                this.filename = 'test.jpeg';
+  } //watch: {
+  //  $route: {
+  //    async handler () {
+  //      await this.fetchPhotos()
+  //    },
+  //    immediate: true
+  //  }
+  //}
 
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function fetchPhotos() {
-        return _fetchPhotos.apply(this, arguments);
-      }
-
-      return fetchPhotos;
-    }()
-  },
-  watch: {
-    $route: {
-      handler: function () {
-        var _handler = _asyncToGenerator(
-        /*#__PURE__*/
-        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  _context3.next = 2;
-                  return this.fetchPhotos();
-
-                case 2:
-                case "end":
-                  return _context3.stop();
-              }
-            }
-          }, _callee3, this);
-        }));
-
-        function handler() {
-          return _handler.apply(this, arguments);
-        }
-
-        return handler;
-      }(),
-      immediate: true
-    }
-  }
 });
 
 function getExt(filename) {
@@ -2333,6 +2287,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     Photo: _components_Photo_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
+  props: {
+    page: {
+      type: Number,
+      required: false,
+      "default": 1
+    }
+  },
   data: function data() {
     return {
       photos: []
@@ -2343,7 +2304,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _fetchPhotos = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response, file;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2353,12 +2314,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                //this.imageData = response.data
-                file = response.data;
-                this.imageData = file;
-                this.filename = 'test.jpeg';
+                this.photos = response.data;
 
-              case 6:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -2404,12 +2362,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   }
 });
-
-function getExt(filename) {
-  var pos = filename.lastIndexOf('.');
-  if (pos === -1) return '';
-  return filename.slice(pos + 1);
-}
 
 /***/ }),
 
@@ -37984,10 +37936,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "photo" }, [
     _c("figure", { staticClass: "photo__wrapper" }, [
-      _c("img", {
-        staticClass: "photo__image",
-        attrs: { src: _vm.item.url, alt: "Photo by " + _vm.item.owner.name }
-      })
+      _c("img", { staticClass: "photo__image", attrs: { src: _vm.item.data } })
     ])
   ])
 }
@@ -38102,9 +38051,9 @@ var render = function() {
     _c(
       "div",
       { staticClass: "grid" },
-      _vm._l(_vm.photos, function(photo) {
+      _vm._l(_vm.photos, function(photo, index) {
         return _c("Photo", {
-          key: photo.id,
+          key: index,
           staticClass: "grid__item",
           attrs: { item: photo }
         })

@@ -40,12 +40,13 @@ methods: {
      }
   },
   reset() {
-    //const input = this.$refs.file;
-    //input.type = 'text';
-    //input.type = 'file';
     this.imageData = '';
     this.filename = '';
   },
+  reload() {
+      this.$router.go({path: this.$router.currentRoute.path, force: true});
+    },
+
   async submit () {
     console.log(this.filename)
     const formData = new FormData()
@@ -53,27 +54,22 @@ methods: {
     formData.append('extension', getExt(this.filename))
     formData.append('eventId', this.$route.params.event_id)
     const response = await axios.post('/api/photos/' + this.$route.params.event_id, formData)
-    //this.reset()
-    //this.$emit('input', false)
-  },
-  async fetchPhotos () {
-    const response = await axios.get('/api/photos?event_id=' + this.$route.params.event_id)
-    //this.imageData = response.data
-    const file = response.data;
-
-    this.imageData = file;
-    this.filename = 'test.jpeg';
-  },
-
+    this.reload()
+  }//,
+  //async fetchPhotos () {
+  //  const response = await axios.get('/api/photos?event_id=' + this.$route.params.event_id)
+  //  const file = response.data;
+  //  this.imageData = file;
+  //},
 },
-  watch: {
-    $route: {
-      async handler () {
-        await this.fetchPhotos()
-      },
-      immediate: true
-    }
-}
+//watch: {
+  //  $route: {
+  //    async handler () {
+  //      await this.fetchPhotos()
+  //    },
+  //    immediate: true
+  //  }
+  //}
 }
   function getExt(filename)
     {
