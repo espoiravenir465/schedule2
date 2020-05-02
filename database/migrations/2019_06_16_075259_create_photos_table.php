@@ -18,6 +18,10 @@ class CreatePhotosTable extends Migration
               $table->string('id');
             //ファイル名(filename)/VARCHAR
               $table->string('filename');
+            //ファイルID(file_id)/VARCHAR
+              $table->string('file_id');
+            //mimeType(mime_type)/VARCHAR
+              $table->string('mime_type');
             //写真データ
               $table->string('data');
             //イベントID(event_id)/INTEGER
