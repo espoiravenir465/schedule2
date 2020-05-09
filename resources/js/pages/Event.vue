@@ -24,7 +24,7 @@
 		      </tr>
 	      </thead>
 	      <tbody>
-		      <tr v-for="(event,event_id) in events" :key="event_id">
+		      <tr v-for="(event,id) in events" :key="id">
 		        <td align = "center" valign ="middle">
              <div v-if="!event.start_edit"  v-on:click="$set(event, 'start_edit', true)">{{event.event_start.slice(0,5)}}</div>
              <input v-if="event.start_edit" type="time" v-model="event.event_start" v-on:blur="$set(event, 'start_edit', false)"  >
@@ -38,12 +38,12 @@
               <input v-if="event.title_edit" type="text" v-model="event.event_title" v-on:blur="$set(event, 'title_edit', false)"  >
             </td>
 			      <td align = "center" valign ="middle" >
-               <router-link :to="`/${schedule_id}/${event.event_id}`">
+               <router-link :to="`/${schedule_id}/${event.id}`">
                 <button class="btn btn-primary">詳細</button>
               </router-link>
             </td>
 			      <td align = "center" valign ="middle" >
-              <button class="btn btn-danger"  v-on:click="deleteEvent(event.event_id)" >削除
+             <button class="btn btn-danger"  v-on:click="deleteEvent(event.id)" >削除
               </button>
             </td>
 		      </tr>
@@ -71,7 +71,7 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
     data () {
       return {
         events: [],
-        event_id: 0,
+        id: 0,
         schedule_id: 1,
         mode: 'single',
     　  formats: {
@@ -110,13 +110,13 @@ import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
         console.log("reload")
         this.$router.go({path: this.$router.currentRoute.path, force: true});
       },
-    async deleteEvent(event_id){
+     async deleteEvent(id){
       console.log("test start")
-      console.log(event_id)
+      console.log(id)
       console.log("end")
       console.log(this.$route.params.id)
       console.log(event_id)
-      const response = await axios.delete('/api/'+this.$route.params.id + '/events/' + event_id+ '/',event_id)
+      const response = await axios.delete('/api/'+this.$route.params.id + '/events/' + id+ '/',id)
       this.events.splice(this.index, 1)
       this.reload();
       },

@@ -36,7 +36,7 @@ class CreatePhotosTable extends Migration
             //外部キー
              $table->engine = 'InnoDB';
              $table->foreign('event_id')
-                    ->references('event_id')
+                     ->references('id')
                      ->on('events')
                      ->onDelete('cascade');
              $table->foreign('user_id')

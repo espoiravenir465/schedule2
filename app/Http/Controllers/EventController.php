@@ -45,7 +45,7 @@ class EventController extends Controller
     \Log::info("test2");
     $event->save();
     //$schedule->events()->save($event);
-    $new_event = Event::where('event_id', $event->event_id)->first();
+    $new_event = Event::where('id', $event->id)->first();
     return response($new_event, 201);
   }
   public function destroy(Request $request)
@@ -53,7 +53,7 @@ class EventController extends Controller
     \Log::info("delete");
     \Log::info($request->id);
     \Log::info($request->schedule_id);
-    $event = Event::where('event_id', $request->id)->delete();
+    $event = Event::where('id', $request->id)->delete();
     $events = Event::all();
     return $events;
   }
@@ -65,17 +65,17 @@ class EventController extends Controller
     foreach ($events as $event)
     {
       //\Log::info($event);
-      //Event::where('event_id', $event['event_id'])->update(['event_title' => $event['event_title']],['event_start' => $event['event_start']],['event_end' => $event['event_end']]);
-      Event::where('event_id', $event['event_id'])->update(['event_title' => $event['event_title']]);
-      Event::where('event_id', $event['event_id'])->update(['event_start' => $event['event_start']]);
-      Event::where('event_id', $event['event_id'])->update(['event_end' => $event['event_end']]);
+      //Event::where('id', $event['id'])->update(['event_title' => $event['event_title']],['event_start' => $event['event_start']],['event_end' => $event['event_end']]);
+      Event::where('id', $event['id'])->update(['event_title' => $event['event_title']]);
+      Event::where('id', $event['id'])->update(['event_start' => $event['event_start']]);
+      Event::where('id', $event['id'])->update(['event_end' => $event['event_end']]);
      }
   }
   public function Eventdetailindex(Request $request)
   {
     \Log::info('Eventdetailindex');
     \Log::info($request);
-    $event = Event::where('event_id', $request->get('id'))->get();
+     $event = Event::where('id', $request->get('id'))->get();
     \Log::info($event);
     \Log::info('testend');
     return $event;

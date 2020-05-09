@@ -15,7 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
            //イベントID (event_id)/INTEGER
-            $table->increments('event_id')->unsigned();
+            $table->increments('id')->unsigned();
             //しおりID (schedule_id)/SERIAL
             $table->integer('schedule_id')->unsigned();
             //イベント名 (event_title)/VARCHAR(50)

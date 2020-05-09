@@ -26,7 +26,7 @@ class CommentController extends Controller
     $comment->event_id=$request->get('event_id');
     $comment->comment=$request->get('comment');
     $comment->save();
-    $new_comment= Comment::where('comment_id', $comment->comment_id)->first();
+    $new_comment= Comment::where('id', $comment->id)->first();
     return response($new_comment, 201);
   }
   public function deleteComment(Request $request)
@@ -34,7 +34,7 @@ class CommentController extends Controller
     \Log::info("deleteComment");
     \Log::info($request->event_id);
     \Log::info($request->comment_id);
-    $comment = Comment::where('comment_id', $request->comment_id)->delete();
+    $comment = Comment::where('id', $request->comment_id)->delete();
     $comments = Comment::where('event_id', $request->event_id)->orderBy(Comment::CREATED_AT, 'desc')->paginate();
     return $comments;
   }
@@ -44,7 +44,7 @@ class CommentController extends Controller
     $comments = $request->all();
     foreach ($comments as $comment)
     {
-      Comment::where('comment_id', $comment['comment_id'])->update(['comment' => $comment['comment']]);
+      Comment::where('id', $comment['id'])->update(['comment' => $comment['comment']]);
     }
   }
 

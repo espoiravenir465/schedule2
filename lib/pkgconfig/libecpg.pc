@@ -1,0 +1,9 @@
+Name: libecpg
+Description: PostgreSQL libecpg library
+Url: http://www.postgresql.org/
+Version: 12.2
+Requires: 
+Requires.private: libpq libpgtypes
+Cflags: -I/Users/emi-h/schedule2/include
+Libs: -L/Users/emi-h/schedule2/lib -lecpg
+Libs.private: -L/opt/local/20180529/lib -L/opt/local/Current/lib -L/opt/local/libexec/llvm-6.0/lib -lm

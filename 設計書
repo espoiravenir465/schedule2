@@ -60,7 +60,7 @@
 
 ●Photosテーブル
 
-写真ID              photo_id / SERIAL
+写真ID              id / SERIAL
 ファイル名          filename  / VARCHAR(255)
 ユーザID            user_id  / INTEGER
 イベントID          event_id / INTEGER
@@ -68,7 +68,7 @@
 
 ●Commentsテーブル
 
-コメントID         comment_id  / SERIAL
+コメントID         id  / SERIAL
 イベントID         event_id  /  INTEGER
 コメント           comment / TEXT
 登録日時           created_at / TIMESTAMP
@@ -109,4 +109,3 @@ api/{schedule_id}/{event_id}/{comment_id}   DELETE  コメント削除
 /{schedule_id}/events  イベント一覧・イベント登録
 /{schedule_id}/{event_id}  イベント詳細・編集・削除/写真投稿・削除
 　　　　　　　　　　　　　　　　　　 コメント投稿・編集・削除
-

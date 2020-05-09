@@ -1,0 +1,14 @@
+
+Installation Directory: /Users/emi-h/schedule2
+Server Installation Directory: /Users/emi-h/schedule2
+Data Directory: /Users/emi-h/schedule2/data
+Database Port: 5432
+Database Superuser: postgres
+Operating System Account: postgres
+Database Service: postgresql-12
+Command Line Tools Installation Directory: /Users/emi-h/schedule2
+pgAdmin4 Installation Directory: /Users/emi-h/schedule2/pgAdmin 4
+Stack Builder Installation Directory: /Users/emi-h/schedule2/stackbuilder
+
+===== Installation completed at: 2020-05-03(YYYY-MM-DD) - 11:29:17(HH:MM:SS) =====
+                            
