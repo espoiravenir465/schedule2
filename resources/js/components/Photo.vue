@@ -1,21 +1,18 @@
 <template>
-  <div class="photo">
+<div class="photo">
     <figure class="photo__wrapper">
-      <img
-        class="photo__image"
-        :src="item.data"
-      >
+        <img class="photo__image" :src="item.data">
     </figure>
-  </div>
+</div>
 </template>
 
 <script>
 export default {
-  props: {
-    item: {
-      type: Object,
-      required: false
+    props: {
+        item: {
+            type: Object,
+            required: false
+        }
     }
-  }
 }
 </script>
