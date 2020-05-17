@@ -16,7 +16,7 @@ class ScheduleController extends Controller{
   }
 
   public function createSchedule(StoreSchedule $request)
-  {     
+  {
     \Log::info($request);
     $schedule = new Schedule();
     $schedule->title = $request->get('title');
@@ -26,16 +26,16 @@ class ScheduleController extends Controller{
     $schedule->edit_title = false;
     $schedule->edit_go_date = false;
     $schedule->edit_return_date = false;
- 
+
     Auth::user()->schedules()->save($schedule);
-        
+
     $new_schedule = Schedule::where('id', $schedule->id)->with('owner')->first();
     return response($schedule, 201);
   }
-    
+
   public function index()
   {
-    $schedules = Schedule::with(['owner'])->orderBy(Schedule::CREATED_AT, 'desc')->paginate();
+    $schedules = Schedule::where('user_id',Auth::user()->id)->orderBy(Schedule::CREATED_AT, 'desc')->paginate();
     return $schedules;
   }
 
@@ -47,13 +47,13 @@ class ScheduleController extends Controller{
     $schedules = Schedule::all();
     return $schedules;
   }
-  
+
   public function editSchedule(Request $request)
   {
     \Log::info("edit");
     //\Log::info($request->all());
     $schedules = $request->all();
-    foreach ($schedules as $schedule) 
+    foreach ($schedules as $schedule)
     {
       \Log::info($schedule);
       \Log::info($schedule['title']);

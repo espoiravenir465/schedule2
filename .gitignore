@@ -15,4 +15,5 @@ yarn-error.log
 uninstall-postgresql.app
 pgAdmin_3rd_party_licenses.txt
 pgAdmin_license.txt
-pgAdmin 4.app
+pgAdmin4.app
+doc
