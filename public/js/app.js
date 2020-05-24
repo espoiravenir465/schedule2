@@ -1890,8 +1890,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2088,9 +2086,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -2257,11 +2252,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2381,7 +2371,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2456,12 +2445,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2804,7 +2787,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      id: 0,
+      event_id: 0,
       event: [],
       comments: [],
       comment_id: 0
@@ -2823,7 +2806,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log('fetchevent');
                 console.log(_this.$route.params);
                 _context.next = 4;
-                return axios.get('/api/event/' + _this.$route.params.id + '/' + _this.$route.params.id + '?id=' + _this.$route.params.id);
+                return axios.get('/api/event/' + _this.$route.params.id + '/' + _this.$route.params.event_id + '?id=' + _this.$route.params.event_id);
 
               case 4:
                 response = _context.sent;
@@ -3043,14 +3026,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3162,6 +3137,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -3344,6 +3321,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -49950,12 +49929,12 @@ var render = function() {
         ? _c(
             "button",
             { staticClass: "button button--link", on: { click: _vm.logout } },
-            [_vm._v("\n    ログアウト\n  ")]
+            [_vm._v("\n        ログアウト\n    ")]
           )
         : _c(
             "RouterLink",
             { staticClass: "button button--link", attrs: { to: "/login" } },
-            [_vm._v("\n    ログイン / 新規登録\n  ")]
+            [_vm._v("\n        ログイン / 新規登録\n    ")]
           )
     ],
     1
@@ -49988,13 +49967,13 @@ var render = function() {
     { staticClass: "navbar" },
     [
       _c("RouterLink", { staticClass: "navbar__brand", attrs: { to: "/" } }, [
-        _vm._v("\n    Bon Voyage!\n  ")
+        _vm._v("\n        Bon Voyage!\n    ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "navbar__menu" }, [
         _vm.isLogin
           ? _c("span", { staticClass: "navbar__item" }, [
-              _vm._v("\n      " + _vm._s(_vm.username) + "\n    ")
+              _vm._v("\n            " + _vm._s(_vm.username) + "\n        ")
             ])
           : _c(
               "div",
@@ -50006,7 +49985,11 @@ var render = function() {
                     staticClass: "button button--link",
                     attrs: { to: "/login" }
                   },
-                  [_vm._v("\n        ログイン / 新規登録\n      ")]
+                  [
+                    _vm._v(
+                      "\n                ログイン / 新規登録\n            "
+                    )
+                  ]
                 )
               ],
               1
@@ -50506,7 +50489,9 @@ var render = function() {
                   [
                     _c(
                       "router-link",
-                      { attrs: { to: "/" + _vm.schedule_id + "/" + event.id } },
+                      {
+                        attrs: { to: "/" + event.schedule_id + "/" + event.id }
+                      },
                       [
                         _c("button", { staticClass: "btn btn-primary" }, [
                           _vm._v("詳細")
@@ -50528,7 +50513,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("削除\n              ")]
+                    [_vm._v("削除\n                        ")]
                   )
                 ])
               ])
@@ -51347,7 +51332,7 @@ var render = function() {
         _c(
           "RouterLink",
           { staticClass: "button button--link", attrs: { to: "/login" } },
-          [_vm._v("\n         まずはこちらから！\n      ")]
+          [_vm._v("\n            まずはこちらから！\n        ")]
         )
       ],
       1

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
         ],
-        
+
         'sqlite_testing' => [
             'driver' => 'sqlite',
             'database' => ':memory:',
