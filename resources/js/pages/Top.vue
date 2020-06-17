@@ -7,7 +7,7 @@
         </RouterLink>
     </div>
     <div class="explain">
-        <p>ようこそBon Voyage!へ</p>
+        <h1>ようこそBon Voyage!へ</h1>
         　<p>旅のスケジュール管理アプリです。</p>
         　<p>旅のしおりとして、旅の思い出の記録として</p>
         　<p>自由にお使い下さい</p>
