@@ -1,6 +1,6 @@
 # Bon Voyage!
 
-![Top](https://github.com/espoiravenir465/schedule2/issues/12#issue-640500601)
+![スクリーンショット 2020-06-04 16 57 14](https://user-images.githubusercontent.com/43898499/84912301-95fc4e00-b0b9-11ea-9415-ab7a2eed4339.png)
 
 "Bon Voyage!" is an application for travel planning with Laravel.
 
