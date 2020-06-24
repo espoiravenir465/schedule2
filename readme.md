@@ -20,7 +20,41 @@ You can leave it as a memory after the trip!
  - Vue.js 2.5.17
  - npm 6.13.1
  - Node.js v13.2.0
+ - Google Drive API
 
+# SETTING
+
+    git clone https://github.com/espoiravenir465/schedule2.git
+    cd schedule2
+
+    composer install
+    composer update
+
+    npm install
+    sudo npm audit fix
+
+*Google API SET UP*
+
+1.Create a project at https://console.developers.google.com
+2.Go to the API Manager and enable Google Drive API
+3.Go to Credentials and create the appropriate type of credential
+4.Download client information
+5.Add a query parameter to the following URL and access it with a browser
+    -example
+    https://accounts.google.com/o/oauth2/auth
+    ?client_id=xxxxxxxxxxxxxxxx
+    &redirect_uri=http://localhost
+    &scope=https://www.googleapis.com/auth/drive
+    &response_type=code
+    &approval_prompt=force
+    &access_type=offline
+6.Open a new tab, enter in the search box, and press enter.
+7.Allow Google Request
+8.Code= which is returned in the search window Copy the following =authentication code
+9.Execute the following command using the ID, URI, key, etc. on the terminal
+    -example
+    curl -d client_id=[client ID] -d client_secret=[client secret] -d redirect_uri=[redirect URI] -d grant_type=authorization_code -d code=[authentication code] https://accounts.google.com/o/oauth2/token
+10.Get refresh token
 
 # License
 Bon Voyage! is licensed under the MIT license.
