@@ -36,9 +36,13 @@ You can leave it as a memory after the trip!
 **Google API SET UP**
 
 1.Create a project at https://console.developers.google.com
+
 1.Go to the API Manager and enable Google Drive API
+
 1.Go to Credentials and create the appropriate type of credential
+
 1.Download client information
+
 1.Add a query parameter to the following URL and access it with a browser
     -example
     https://accounts.google.com/o/oauth2/auth
@@ -48,12 +52,17 @@ You can leave it as a memory after the trip!
     &response_type=code
     &approval_prompt=force
     &access_type=offline
+
 1.Open a new tab, enter in the search box, and press enter.
+
 1.Allow Google Request
+
 1.Code= which is returned in the search window Copy the following =authentication code
+
 1.Execute the following command using the ID, URI, key, etc. on the terminal
     -example
     curl -d client_id=[client ID] -d client_secret=[client secret] -d redirect_uri=[redirect URI] -d grant_type=authorization_code -d code=[authentication code] https://accounts.google.com/o/oauth2/token
+
 1.Get refresh token
 
 # License
